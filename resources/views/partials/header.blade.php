@@ -22,8 +22,8 @@
             <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"" aria-label="Primary menu">
                 <ul class="flex justify-start space-x-20">
                     <li class="menu-item"><a href="{{ route('about') }}" class="text-white text-l hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">ABOUT</a></li>
-                    <li class="menu-item"><a href="{{ route('tours') }}" class="text-white text-l hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
-                    <li class="menu-item"><a href="{{ route('contact') }}" class="text-white text-l hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                    <li class="menu-item"><a href="#explore" class="text-white text-l hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    <li class="menu-item"><a href="#contact" class="text-white text-l hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,8 +33,8 @@
             <div class="container mx-auto px-4 relative h-full flex items-center justify-center">
                 <ul class="space-y-4 text-center">
                     <li><a href="{{ route('about') }}" class="block px-4 py-3 text-white text-xl hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">ABOUT</a></li>
-                    <li><a href="{{ route('tours') }}" class="block px-4 py-3 text-white text-xl hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
-                    <li><a href="{{ route('contact') }}" class="block px-4 py-3 text-white text-xl hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                    <li><a href="#explore" class="block px-4 py-3 text-white text-xl hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    <li><a href="#contact" class="block px-4 py-3 text-white text-xl hover:text-gray-300 font-bold font-['Raleway'] tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
                 </ul>
             </div>
         </div>
