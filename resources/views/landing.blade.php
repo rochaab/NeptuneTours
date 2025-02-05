@@ -13,6 +13,59 @@
     <title>Landing Page</title>
     @vite('resources/css/app.css') <!-- Assuming you're using Vite for asset bundling -->
 </head>
+<style>
+        @keyframes moveLines {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .moving-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 25%,
+                rgba(255, 255, 255, 0.1) 25%,
+                rgba(255, 255, 255, 0.1) 50%
+            );
+            background-size: 200% 200%;
+            animation: moveLines 10s linear infinite;
+            z-index: 0;
+        }
+
+    #map-info {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 12px; /* Fixed typo: removed space between 12 and px */
+        max-width: 250px;
+        z-index: 1000; /* Ensure it appears above the map */
+        position: absolute; /* Position it absolutely within the map container */
+        right: 60px; /* Move it to the right */
+    }
+
+    #map-info h4 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1e40af; /* Blue-800 */
+        margin-bottom: 8px;
+    }
+
+    #map-info p {
+        font-size: 14px;
+        color: #4b5563; /* Gray-600 */
+        margin-bottom: 12px;
+    }
+
+    #map-info img {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 12px;                           
+    }
+</style>
 <body class="bg-white font-['Raleway']">
 
     @include('partials.header')
@@ -26,9 +79,9 @@
         </div>
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="absolute inset-0 flex items-center justify-center text-white p-4">
-            <div class="max-w-full md:max-w-[900px] text-left md:ml-[-30%]">
+            <div class="max-w-full md:max-w-[900px] text-center md:text-left md:ml-[-30%]">
                 <p class="text-s font-bold leading-tight mb-2 font-Anek tracking-[0.1em]">EXPERIENCE</p>
-                <h1 id="typing-animation" class="md:text-7xl font-bold font-Eczar leading-tight mb-6"></h1>
+                <h1 id="typing-animation" class="text-4xl md:text-7xl font-bold font-Eczar leading-tight mb-6"></h1>
                 <script>
                     const text = "Neptune Tours and Travels: Your Paradise Gateway to El Nido";
                     let index = 0;
@@ -50,50 +103,70 @@
     </section>
 
     <!-- Tours Section -->
-    <section id="explore" class="bg-[#faf7f2] font-Inter">
-        <div class="container mx-auto">
+    <div id="explore" class="bg-[#faf7f2] font-Inter">
+        <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div class="flex items-start">
                 <div class="animate-slide-in-left">
                     <p class="text-s font-black leading-tight mb-2 font-Poppins tracking-[0.1em] text-[#080c24]">TRAVEL AND TOURS</p>
-                    <h2 class="text-3xl sm:text-5xl font-Eczar font-extrabold text-[#040823] mb-8 text-left w-2/3">Choose from four unique tours and plan your journey using our interactive map. Adventure awaits!</h2>
+                    <h2 class="text-3xl sm:text-5xl font-Eczar font-extrabold text-[#040823] mb-8 text-left">Choose from four unique tours and plan your journey using our interactive map. Adventure awaits!</h2>
                 </div>
             </div>
 
             <!-- Tours Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                 <!-- Tour A -->
-                <div class="tour-item group relative overflow-hidden h-[400px] cursor-pointer" data-tour="tourA">
-                    <img src="{{ asset('images/seven-commandos.jpg') }}" alt="Tour A" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4">
-                        <h3 class="text-2xl font-Eczar font-extrabold">El Nido Palawan Tour A</h3>
-                        <p class="text-sm font-Anek">Experience the stunning beauty of El Nido's most iconic destinations.</p>
+                <div class="tour-item group relative cursor-pointer" data-tour="tourA">
+                    <div class="h-[300px] overflow-hidden">
+                        <img src="{{ asset('images/seven-commandos.jpg') }}" alt="Tour A" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
+                    </div>
+                    <div class="text-black p-[4px]">
+                        <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour A</h3>
+                        <p class="text-l font-Anek mt-4">Experience the stunning beauty of El Nido's most iconic destinations.</p>
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        </button>
                     </div>
                 </div>
 
                 <!-- Tour B -->
-                <div class="tour-item group relative overflow-hidden h-[400px] cursor-pointer" data-tour="tourB">
-                    <img src="{{ asset('images/pinagbuyutan-island.webp') }}" alt="Tour B" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4">
-                        <h3 class="text-2xl font-Eczar font-extrabold">El Nido Palawan Tour B</h3>
-                        <p class="text-sm font-Anek">Discover hidden caves and pristine beaches on this exciting island-hopping adventure.</p>
+                <div class="tour-item group relative cursor-pointer" data-tour="tourB">
+                    <div class="h-[300px] overflow-hidden">
+                        <img src="{{ asset('images/pinagbuyutan-island.webp') }}" alt="Tour B" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
+                    </div>
+                    <div class="text-black p-[4px]">
+                        <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour B</h3>
+                        <p class="text-l font-Anek mt-4">Discover hidden caves and pristine beaches on this exciting island-hopping adventure.</p>
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        </button>
                     </div>
                 </div>
 
                 <!-- Tour C -->
-                <div class="tour-item group relative overflow-hidden h-[400px] cursor-pointer" data-tour="tourC">
-                    <img src="{{ asset('images/hidden-beach.webp') }}" alt="Tour C" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4">
-                        <h3 class="text-2xl font-Eczar font-extrabold">El Nido Palawan Tour C</h3>
-                        <p class="text-sm font-Anek">Explore hidden beaches and stunning rock formations on this unforgettable journey.</p>
+                <div class="tour-item group relative cursor-pointer" data-tour="tourC">
+                    <div class="h-[300px] overflow-hidden">
+                        <img src="{{ asset('images/hidden-beach.webp') }}" alt="Tour C" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
+                    </div>
+                    <div class="text-black p-[4px]">
+                        <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour C</h3>
+                        <p class="text-l font-Anek mt-4">Explore hidden beaches and stunning rock formations on this unforgettable journey.</p>
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        </button>
                     </div>
                 </div>
 
                 <!-- Tour D -->
-                <div class="tour-item group relative overflow-hidden h-[400px] cursor-pointer" data-tour="tourD">
-                    <img src="{{ asset('images/cadlao-lagoon.jpg') }}" alt="Tour D" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4">
-                        <h3 class="text-2xl font-Eczar font-extrabold">El Nido Palawan Tour D</h3>
-                        <p class="text-sm font-Anek">Experience the tranquil beauty of secluded beaches and pristine lagoons.</p>
+                <div class="tour-item group relative cursor-pointer" data-tour="tourD">
+                    <div class="h-[300px] overflow-hidden">
+                        <img src="{{ asset('images/cadlao-lagoon.jpg') }}" alt="Tour D" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
+                    </div>
+                    <div class="text-black p-[4px]">
+                        <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour D</h3>
+                        <p class="text-l font-Anek mt-4">Experience the tranquil beauty of secluded beaches and pristine lagoons.</p>
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        </button>
                     </div>
                 </div>
             </div>
@@ -116,7 +189,7 @@
                 <div class="map-container relative mb-16 lg:mb-0 lg:w-2/3 h-[550px] flex justify-center animate-slide-in-bottom">
                     <div id="map" class="w-full h-full rounded-lg border border-gray-300 shadow-md"></div>
                     <!-- Floating Info Box -->
-                    <div id="map-info" class="absolute top-4 left-4 bg-white rounded-lg shadow-md p-4 w-60 hidden">
+                    <div id="map-info" class="hidden">
                         <h4 id="map-info-title" class="text-lg font-semibold text-blue-800">Tour Information</h4>
                         <p id="map-info-description" class="text-gray-600 mt-2">Select a location to view details.</p>
                         <img id="map-info-image" src="" alt="Tour Image" class="rounded-lg mt-4 hidden">
@@ -124,7 +197,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Include Leaflet CSS and JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -205,7 +278,18 @@
             markers = [];
             tourData.subTours.forEach(subTour => {
                 const marker = L.marker([subTour.lat, subTour.lng]).addTo(map)
-                    .bindPopup(`<b>${subTour.name}</b><br>${subTour.description}`);
+                    .on('click', function() {
+                        // Zoom in on the clicked marker
+                        map.setView([subTour.lat, subTour.lng], 15);
+
+                        // Update the floating info box
+                        const mapInfo = document.getElementById('map-info');
+                        mapInfo.classList.remove('hidden');
+                        document.getElementById('map-info-title').textContent = subTour.name;
+                        document.getElementById('map-info-description').textContent = subTour.description;
+                        document.getElementById('map-info-image').src = subTour.image;
+                        document.getElementById('map-info-image').classList.remove('hidden');
+                    });
                 markers.push(marker);
             });
 
@@ -219,7 +303,7 @@
                     const name = this.textContent.trim();
 
                     // Update the map view to the selected sub-tour's coordinates
-                    map.setView([lat, lng], 13);
+                    map.setView([lat, lng], 15);
 
                     // Show the floating info box
                     const mapInfo = document.getElementById('map-info');
@@ -270,100 +354,103 @@
                     description: "Explore hidden beaches and stunning rock formations on this unforgettable journey.",
                     image: "images/hidden-beach.webp",
                     subTours: [
-                        { name: "Star Beach", lat: 11.20313, lng: 119.26999, image: "images/star-beach.jpg", description: "A secluded beach with beautiful views." },
-                        { name: "Helicopter Island", lat: 11.196214, lng: 119.338308, image: "images/helicopter-island.jpg", description: "Famous for its rock formations." },
-                        { name: "Matinloc Shrine", lat: 11.20289, lng: 119.27529, image: "images/matinloc-shrine.jpg", description: "A historic site with a picturesque view." },
-                        { name: "Hidden Beach", lat: 11.19093, lng: 119.28220, image: "images/hidden-beach.webp", description: "A quiet and peaceful beach." },
-                        { name: "Secret Beach", lat: 11.17831, lng: 119.28132, image: "images/secret-beach.jpg", description: "A serene and isolated beach." }
+                        { name: "Hidden Beach", lat: 11.20611, lng: 119.39172, image: "images/hidden-beach.webp", description: "A peaceful and secluded beach with crystal-clear water." },
+                        { name: "Secret Beach", lat: 11.20903, lng: 119.39691, image: "images/secret-beach.jpg", description: "A secret cove with a sandy beach surrounded by cliffs." },
+                        { name: "Matinloc Shrine", lat: 11.18261, lng: 119.41407, image: "images/matinloc-shrine.jpg", description: "A historic shrine offering panoramic views of the island." },
+                        { name: "Talisay Beach", lat: 11.15877, lng: 119.37512, image: "images/talisay-beach.jpg", description: "A tranquil beach perfect for swimming and relaxing." },
+                        { name: "Helicopter Island", lat: 11.21487, lng: 119.36544, image: "images/helicopter-island.jpg", description: "An island known for its helicopter-shaped rock formations." }
                     ]
                 },
+
                 tourD: {
                     title: "El Nido Palawan Tour D",
                     description: "Experience the tranquil beauty of secluded beaches and pristine lagoons.",
                     image: "images/cadlao-lagoon.jpg",
                     subTours: [
-                        { name: "Cadlao Lagoon", lat: 11.21470, lng: 119.34549, image: "images/cadlao-lagoon.jpg", description: "A beautiful lagoon with crystal clear waters." },
-                        { name: "Pasandigan Cove", lat: 11.20835, lng: 119.35740, image: "images/pasandigan-cove.jpg", description: "A peaceful cove perfect for swimming." },
-                        { name: "Nat Nat Beach", lat: 11.20590, lng: 119.36389, image: "images/nat-nat-beach.webp", description: "A quiet beach surrounded by cliffs." },
-                        { name: "Bukal Island", lat: 11.20926, lng: 119.37907, image: "images/bukal-island.jpg", description: "An isolated island perfect for relaxation." },
-                        { name: "Paradise Beach", lat: 11.19830, lng: 119.37792, image: "images/paradise-beach.jpg", description: "A hidden paradise beach." }
+                        { name: "Cadlao Lagoon", lat: 11.17983, lng: 119.36319, image: "images/cadlao-lagoon.jpg", description: "A serene lagoon surrounded by towering limestone cliffs." },
+                        { name: "Pasandigan Beach", lat: 11.17983, lng: 119.37495, image: "images/pasandigan-beach.jpg", description: "A peaceful beach with clear water, perfect for a swim." },
+                        { name: "Natnat Beach", lat: 11.18331, lng: 119.37593, image: "images/natnat-beach.jpg", description: "A secluded beach with golden sand and crystal-clear water." },
+                        { name: "Pinagbuyutan Island", lat: 11.17038, lng: 119.37162, image: "images/pinagbuyutan-island.jpg", description: "A tropical paradise with stunning beaches and picturesque landscapes." },
+                        { name: "Dolarog Beach", lat: 11.17765, lng: 119.38083, image: "images/dolarog-beach.jpg", description: "A quiet beach offering beautiful views of the surrounding islands." }
                     ]
                 }
             };
             return tours[tour];
         }
-
-        // Back button functionality
-        document.getElementById('back-button').addEventListener('click', () => {
-            // Hide the tour details and map section
-            document.getElementById('tour-details').classList.add('hidden');
-            // Show the tours grid
-            document.querySelector('.grid').classList.remove('hidden');
-        });
     </script>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-[#faf7f2] py-20 min-h-[627px] h-[627px] font-Inter">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Map Section -->
-                <div class="h-full">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.802548850809!2d121.04131931478882!3d14.554743589828378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDMzJzE3LjEiTiAxMjHCsDAyJzM0LjgiRQ!5e0!3m2!1sen!2sph!4v1629788269874!5m2!1sen!2sph"
-                        class="w-full h-[400px] rounded-lg shadow-md"
-                        allowfullscreen=""
-                        loading="lazy">
-                    </iframe>
-                </div>
+    <div class="w-full h-auto bg-[#10194a] flex flex-col items-center justify-center text-center p-10 relative font-Anek">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 font-Eczar mt-10">Choose Your Perfect Adventure!</h1>
+        <p class="text-white mb-6 max-w-2xl px-4">Explore El Nido with our four amazing tours! From island hopping to hidden lagoons, pristine beaches, and stunning sunset cruises—your perfect adventure awaits. Get in touch today!</p>
 
-                <!-- Quick Description -->
-                <div class="text-left">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Visit Our Office</h3>
-                    <div class="space-y-4">
-                        <p class="flex items-center text-gray-600">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            123 Tourism Road, Puerto Princesa, Palawan
-                        </p>
-                        <p class="flex items-center text-gray-600">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                            </svg>
-                            +63 912 345 6789
-                        </p>
-                        <p class="flex items-center text-gray-600">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                            info@tourismpalawan.com
-                        </p>
-                    </div>
-                </div>
+        <form action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl mt-[-40px] p-2">
+            @csrf
+            <!-- Full Name -->
+            <div>
+                <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Full Name*" required>
+            </div>
+            <!-- Phone & Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Phone Number*" required>
+                <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Email Address*" required>
+            </div>
+            <!-- Message -->
+            <div>
+                <textarea id="message" name="message" rows="4" class="w-full p-4 h-4border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Enter your message..." required></textarea>
+            </div>
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105">
+                    Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                </button>
+            </div>
+        </form>
+    </div>
 
-                <!-- Contact Form -->
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4 text-left">SEND US A MESSAGE</h2>
-                    <hr class="border-t-[2px] border-[#040823] mb-6">
-                    <form action="{{ route('contact.send') }}" method="POST" class="space-y-4">
-                        @csrf
-                        <div>
-                            <input type="text" id="name" name="name" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all" placeholder="Name" required>
-                        </div>
-                        <div>
-                            <input type="email" id="email" name="email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all" placeholder="Email" required>
-                        </div>
-                        <div>
-                            <textarea id="message" name="message" rows="4" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all" placeholder="Message" required></textarea>
-                        </div>
-                        <button type="submit" class="w-[120px] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-md font-medium hover:from-blue-700 hover:to-blue-800 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                            SUBMIT
-                        </button>
-                    </form>
+    <!-- Footer Section -->
+    <div class="w-full bg-[#080c24] text-white py-10 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Branding -->
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold font-Eczar mr-20">Neptune Tours and Travels</h2>
+            </div>
+            
+            <!-- Call Us -->
+            <div>
+                <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
+                <p>+63 917 158 3266</p>
+            </div>
+            
+            <!-- Email Us -->
+            <div>
+                <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
+                <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white">neptunetravel.tours@gmail.com</a></p>
+            </div>
+            
+            <!-- Social Media -->
+            <div class="flex flex-col items-center">
+                <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-6 h-6">
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6">
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
+                        <img src="https://www.citypng.com/public/uploads/preview/tik-tok-logo-icon-701751694793267gxetcvvp3v.png" alt="TikTok" class="w-6 h-6">
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Scroll Animations using AOS (Animate on Scroll) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
 </body>
 </html>
