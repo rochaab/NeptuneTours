@@ -21,7 +21,7 @@ class ContactController extends Controller
 
         try {
             // Send the email using the ContactMail Mailable
-            Mail::to('your-email@gmail.com')->send(new ContactMail($request));
+            Mail::to('hydrawatah123@gmail.com')->send(new ContactMail($request));
 
             // Flash success message
             Session::flash('success', 'Your message has been sent successfully!');

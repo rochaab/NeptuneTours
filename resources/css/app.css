@@ -32,3 +32,25 @@ section {
         width: 12rem; 
     }
 }
+
+@font-face {
+    font-family: 'PaloCompressedMedium';
+    src: url('/fonts/Palo Compressed Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PaloWideLight';
+    src: url('/fonts/PaloWideLight.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-PaloCompressed {
+    font-family: 'PaloCompressedMedium', sans-serif;
+}
+
+.font-PaloWideLight {
+    font-family: 'PaloWideLight', sans-serif;
+}

@@ -5,121 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us Message</title>
     <style>
-        /* Global Styles for Body */
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Arial', sans-serif;
+            background: #121212;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #ffffff;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* Table Layout for Email */
+        /* Email Table Layout */
         table {
             width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #ffffff;
+            max-width: 700px;
+            margin: 40px auto;
+            background: #1e1e1e;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border: none;
             padding: 20px;
         }
-
-        /* Heading */
+        /* Header Styles */
         h2 {
             font-size: 24px;
-            color: #337AB7;
+            color: #00adee;
             text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Card View Styles */
-        .card {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            color: #337AB7;
-            margin-bottom: 10px;
+            margin: 20px 0;
+            font-weight: bold;
         }
 
         /* Content Styles */
         .content {
             font-size: 16px;
-            line-height: 1.6;
-            color: #555;
+            color: #d1d1d1;
+            line-height: 1.8;
+            margin: 20px 0;
         }
 
         .content p {
             margin-bottom: 10px;
         }
 
-        .content strong {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        /* Button Style */
-        .button {
-            background-color: #337AB7;
-            color: #fff;
+        .content a {
+            color: #00adee;
             text-decoration: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
+            font-weight: 500;
         }
 
-        /* Footer Style */
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
         .footer {
             text-align: center;
-            font-size: 14px;
-            color: #aaa;
             margin-top: 20px;
+            font-size: 12px;
+            color: #888;
         }
 
-        /* Responsive Styles */
-        @media screen and (max-width: 600px) {
-            h2 {
-                font-size: 20px;
-            }
+        .footer a {
+            color: #00adee;
+            text-decoration: none;
+        }
 
-            .content {
-                font-size: 14px;
-            }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Divider */
+        .divider {
+            margin: 20px 0;
+            border-top: 1px solid #444;
         }
     </style>
 </head>
 <body>
-
     <table>
         <tr>
             <td>
+                   <!-- Add the logo here -->
+                <img src="{{ asset('images/logo.png') }}" alt="Neptune Travel And Tours Logo" style="width:150px; height:auto; display:block; margin-bottom: 20px;">
                 <h2>Contact Us Message</h2>
-
-                <!-- Card View for Message Content -->
-                <div class="card">
-                    <h3>Message Details</h3>
-                    <div class="content">
-                        <p><strong>Name:</strong> {{ $request->name }}</p>
-                        <p><strong>Email:</strong> {{ $request->email }}</p>
-                        <p><strong>Message:</strong> {{ $request->message }}</p>
-                    </div>
+                <div class="content">
+                    <p>Hi, Admin</p>
+                    <p>You received the following message:</p>
+                    <p><strong>Name:</strong> {{ $request->name }}</p>
+                    <p><strong>Email:</strong> {{ $request->email }}</p>
+                    <p><strong>Message:</strong> {{ $request->message }}</p>
                 </div>
-
+                <div class="divider"></div>
                 <div class="footer">
-                    <!-- Footer content can go here -->
+                    <p>&copy; 2025 Neptune Travel And Tours. All rights reserved.</p>
                 </div>
             </td>
         </tr>
     </table>
-
 </body>
 </html>
