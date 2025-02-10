@@ -1,4 +1,15 @@
 <header id="header" class="fixed top-0 left-0 right-0 bg-transparent z-50 transition-all duration-500 mt-8">
+<style>
+    #header {
+        z-index: 9999; /* Super high to stay on top */
+        position: fixed; /* Ensure it stays at the top */
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+</style>
+
     <div class="container mx-auto px-4 py-3">
         <div class="flex justify-between items-center">
             <!-- Logo Section -->

@@ -35,36 +35,45 @@
             animation: moveLines 10s linear infinite;
             z-index: 0;
         }
+        #map-container {
+            position: relative; /* Ensure this is set */
+        }
 
-    #map-info {
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 12px; /* Fixed typo: removed space between 12 and px */
-        max-width: 250px;
-        z-index: 1000; /* Ensure it appears above the map */
-        position: absolute; /* Position it absolutely within the map container */
-        right: 60px; /* Move it to the right */
-    }
+        #map-info {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px; /* Increased padding for better spacing */
+            max-width: 350px; /* Increased width */
+            width: 100%; /* Ensure it expands */
+            z-index: 1000;
+            position: absolute;
+            right: 90px; /* Adjust if needed */
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-    #map-info h4 {
-        font-size: 18px;
-        font-weight: bold;
-        color: #1e40af; /* Blue-800 */
-        margin-bottom: 8px;
-    }
+        #map-info h4 {
+            font-size: 22px; /* Increased text size */
+            font-weight: bold;
+            color: #1e40af; /* Blue-800 */
+            margin-bottom: 12px;
+        }
 
-    #map-info p {
-        font-size: 14px;
-        color: #4b5563; /* Gray-600 */
-        margin-bottom: 12px;
-    }
+        #map-info p {
+            font-size: 16px; /* Increased text size */
+            color: #4b5563; /* Gray-600 */
+            margin-bottom: 16px;
+        }
 
-    #map-info img {
-        width: 100%;
-        border-radius: 8px;
-        margin-top: 12px;                           
-    }
+        #map-info img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            margin-top: 16px;                           
+        }
+
+
 </style>
 <body class="bg-white font-['Raleway']">
 
@@ -175,7 +184,6 @@
             <div id="tour-details" class="hidden flex flex-col lg:flex-row gap-8 h-[calc(100vh-350px)]">
                 <!-- Back Button -->
                 <button id="back-button" class="absolute top-4 left-4 bg-white rounded-lg shadow-md p-2 z-10 flex items-center gap-2 hover:bg-gray-100 transition-colors">
-                    <span>&#8592;</span> Back to Tours
                 </button>
 
                 <!-- Tour Details -->
@@ -527,8 +535,5 @@
         }
     });
 </script>
-
-
-
 </body>
 </html>
