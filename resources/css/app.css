@@ -1,3 +1,176 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Moving Lines Animation */
+@keyframes moveLines {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.moving-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 25%,
+        rgba(255, 255, 255, 0.1) 25%,
+        rgba(255, 255, 255, 0.1) 50%
+    );
+    background-size: 200% 200%;
+    animation: moveLines 10s linear infinite;
+    z-index: 0;
+}
+
+/* Map Container Styling */
+#map-container {
+    position: relative;
+}
+
+#map-info {
+    background: #faf7f2;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    max-width: 400px;
+    max-height: 550px;
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#map-info h4 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #040823;
+    margin-bottom: -4px;
+    margin-top: 16px;
+}
+
+#map-info p {
+    font-size: 16px;
+    color: #3b3f44;
+    margin-bottom: 8px;
+}
+
+#map-info img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 350px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: none;
+}
+
+.carousel-image.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Responsive Adjustments for Mobile Devices */
+@media (max-width: 768px) {
+    /* Hide the map on mobile devices */
+    #map {
+        display: none;
+    }
+
+    /* Adjust the map-info section for mobile */
+    #map-info {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+        padding: 16px;
+    }
+
+    #map-info img {
+        max-height: 250px;
+    }
+
+    #map-info h4 {
+        font-size: 18px;
+    }
+
+    #map-info p {
+        font-size: 14px;
+    }
+
+    /* Adjust the tour details section for mobile */
+    #tour-details {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .map-container {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    /* Adjust the contact form section for mobile */
+    #contactForm {
+        margin-top: 10px; /* Reduce margin for mobile */
+    }
+
+    .tour-item button {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .tour-item button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+    
+    .tour-item button:hover::after {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .tour-item button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+}
