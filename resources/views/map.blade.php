@@ -258,7 +258,7 @@
     </section>
 
     <!-- Include Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <!--  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // Initialize the Leaflet map
         const map = L.map('map').setView([11.181602, 119.386894], 12); // Set center and zoom level
@@ -292,6 +292,6 @@
 
         // Initialize the starting point
         setStartingPoint();
-    </script>
+    </script>-->
 </body>
 </html>

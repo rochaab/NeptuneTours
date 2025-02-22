@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Styles */
 html {
     scroll-behavior: smooth;
 }
+
 section {
     min-height: 100vh;
     display: flex;
@@ -12,45 +14,233 @@ section {
     align-items: center;
 }
 
-#map-info {
+/* Moving Lines Animation */
+@keyframes moveLines {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.moving-lines {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 25%,
+        rgba(255, 255, 255, 0.1) 25%,
+        rgba(255, 255, 255, 0.1) 50%
+    );
+    background-size: 200% 200%;
+    animation: moveLines 10s linear infinite;
+    z-index: 0;
+}
+
+/* Map Container Styling */
+
+.map-container {
+    width: 1200%; /* Make sure it takes the correct width */
+    max-width: 1200px; /* Prevent it from stretching too much */
+}
+
+#map {
+    width: 100%; /* Ensure it fits within .map-container */
+    height: 100%;
+    right: -20px; /* Moves it more to the right */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#map-info {
+    background: #faf7f2;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    max-width: 400px;
+    max-height: 550px;
+    width: 100%;
+    z-index: 1000;
+    position: absolute;
+    right: 40px;
     top: 50%;
-    left: 60%; 
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 0.5rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    padding: 1rem; 
-    width: 15rem; 
-    z-index: 10; 
+    transform: translateY(-50%);
 }
 
-/* Adjust for phones or small screens */
-@media (max-width: 768px) {
-    #map-info {
-        left: 75%; 
-        width: 12rem; 
+#map-info h4 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #040823;
+    margin-bottom: -4px;
+    margin-top: 16px;
+}
+
+#map-info p {
+    font-size: 16px;
+    color: #3b3f44;
+    margin-bottom: 8px;
+}
+
+#map-info img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 350px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: none;
+}
+
+.carousel-image.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+
+ /* Adjust the contact form section for mobile */
+    #contactForm {
+        margin-top: 10px; /* Reduce margin for mobile */
     }
-}
 
-@font-face {
-    font-family: 'PaloCompressedMedium';
-    src: url('/fonts/Palo Compressed Medium.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+    .tour-item button {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .tour-item button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+    
+    .tour-item button:hover::after {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .tour-item button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
 
-@font-face {
-    font-family: 'PaloWideLight';
-    src: url('/fonts/PaloWideLight.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+    /* --- Hides the scrollbar for all browsers ---*/
+    .scrollbar-hide {
+        scrollbar-width: none; /*--- Firefox ---*/
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* --- Chrome, Safari --- */
+    }
 
-.font-PaloCompressed {
-    font-family: 'PaloCompressedMedium', sans-serif;
-}
+    #videoModal {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 
-.font-PaloWideLight {
-    font-family: 'PaloWideLight', sans-serif;
+    #videoModal.open {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    #videoModal.hidden {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .content {
+        flex-grow: 1;
+    }
+
+/*Mobile View */
+
+    @media (max-width: 768px) {          
+        .map-container {
+        width: 100%; /* ---Full width on mobile---*/
+        min-height: 300px; /* ---Ensures a minimum height--- */
+        height: auto; /*--- Adjusts dynamically--- */
+        top: 20px;
+        right:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+    
+    }
+        #map-info {
+            max-width: 50%; /*--- Ensures it fits within half the screen --- */
+            max-height: 450px; /* --- Prevents it from being too tall --- */ 
+            right: 5%; /*  --- Moves it closer to the right  --- */
+            left: auto; /* --- Prevents forced positioning  --- */
+            top: 10px;
+            bottom: 20px;
+            transform: none;
+            padding: 9px;
+            font-size: 14px;
+        }
+    
+        #map-info h4 {
+            font-size: 18px;
+            margin-top: 12px;
+        }
+    
+        #map-info p {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        #exploreTripButton {
+            pointer-events: none; /* Disables clicking the button */
+            opacity: 0.6; /* Optionally make it look disabled */
+        }
+    
+        #map-info img {
+            max-width: 100%;
+            max-height: 150px;
+        }
+    }
+    
+
+
+/* Larger Screens (Desktops & Laptops) */
+@media (min-width: 1024px) {
+    .tour-map-container {
+        flex-direction: row; /* --- Side-by-side layout  ---*/
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .tour-details-container {
+        width: 33.33%; /*--- Matches lg:w-1/3 ---*/
+        height: 550px;
+    }
+
+    #map {
+        width: 100%; 
+        height: 550px;
+    }
 }

@@ -1,84 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Font Preconnects (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Combined Google Fonts Request -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&family=Poppins&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Anek+Tamil:wght@100..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+
+
+    
     <title>Landing Page</title>
-    @vite('resources/css/app.css') <!-- Assuming you're using Vite for asset bundling -->
+    @vite('resources/css/app.css')
+    @vite(['resources/js/app.js'])
 </head>
-<style>
-        @keyframes moveLines {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        .moving-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 25%,
-                rgba(255, 255, 255, 0.1) 25%,
-                rgba(255, 255, 255, 0.1) 50%
-            );
-            background-size: 200% 200%;
-            animation: moveLines 10s linear infinite;
-            z-index: 0;
-        }
-        #map-container {
-            position: relative; /* Ensure this is set */
-        }
-
-        #map-info {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px; /* Increased padding for better spacing */
-            max-width: 350px; /* Increased width */
-            width: 100%; /* Ensure it expands */
-            z-index: 1000;
-            position: absolute;
-            right: 90px; /* Adjust if needed */
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        #map-info h4 {
-            font-size: 22px; /* Increased text size */
-            font-weight: bold;
-            color: #1e40af; /* Blue-800 */
-            margin-bottom: 12px;
-        }
-
-        #map-info p {
-            font-size: 16px; /* Increased text size */
-            color: #4b5563; /* Gray-600 */
-            margin-bottom: 16px;
-        }
-
-        #map-info img {
-            width: 100%;
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 8px;
-            margin-top: 16px;                           
-        }
-
-
-</style>
 <body class="bg-white font-['Raleway']">
-
     @include('partials.header')
-
     <!-- Landing Section -->
     <section id="landing-carousel" class="relative h-screen bg-cover bg-center overflow-hidden">
         <div class="carousel-slides">
@@ -112,78 +55,85 @@
     </section>
 
     <!-- Tours Section -->
-    <div id="explore" class="bg-[#faf7f2] font-Inter">
+    <div id="explore" class="w-full min-h-screen flex flex-col justify-center bg-[#faf7f2] font-Inter">
         <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div class="flex items-start">
-                <div class="animate-slide-in-left">
+                <div data-aos="fade-left" data-aos-duration="1000">
                     <p class="text-s font-black leading-tight mb-2 font-Poppins tracking-[0.1em] text-[#080c24]">TRAVEL AND TOURS</p>
-                    <h2 class="text-3xl sm:text-5xl font-Eczar font-extrabold text-[#040823] mb-8 text-left">Choose from four unique tours and plan your journey using our interactive map. Adventure awaits!</h2>
+                    <h2 class="text-3xl sm:text-5xl font-Eczar font-extrabold text-[#040823] mb-8 text-left">
+                        Choose from four unique tours and plan your journey using our interactive map. Adventure awaits!
+                    </h2>
                 </div>
             </div>
 
             <!-- Tours Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                 <!-- Tour A -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourA">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourA" 
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="h-[300px] overflow-hidden">
-                        <img src="{{ asset('images/seven-commandos.jpg') }}" alt="Tour A" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
+                        <img src="{{ asset('images/tour-a-7commandos.jpg') }}" alt="Tour A" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour A</h3>
                         <p class="text-l font-Anek mt-4">Experience the stunning beauty of El Nido's most iconic destinations.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
                             Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
 
                 <!-- Tour B -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourB">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourB" 
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/pinagbuyutan-island.webp') }}" alt="Tour B" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour B</h3>
                         <p class="text-l font-Anek mt-4">Discover hidden caves and pristine beaches on this exciting island-hopping adventure.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
                             Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
 
                 <!-- Tour C -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourC">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourC" 
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/hidden-beach.webp') }}" alt="Tour C" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour C</h3>
                         <p class="text-l font-Anek mt-4">Explore hidden beaches and stunning rock formations on this unforgettable journey.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
                             Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
 
                 <!-- Tour D -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourD">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourD" 
+                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/cadlao-lagoon.jpg') }}" alt="Tour D" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour D</h3>
                         <p class="text-l font-Anek mt-4">Experience the tranquil beauty of secluded beaches and pristine lagoons.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition hover:bg-[#040823] hover:border-[#040823] font-Anek">
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
                             Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
             </div>
 
+
             <!-- Tour Details and Map Section (Hidden Initially) -->
-            <div id="tour-details" class="hidden flex flex-col lg:flex-row gap-8 h-[calc(100vh-350px)]">
+            <div id="tour-details" class="hidden flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-350px)]">
                 <!-- Back Button -->
-                <button id="back-button" class="absolute top-4 left-4 bg-white rounded-lg shadow-md p-2 z-10 flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                <button id="back-button" class="">
                 </button>
 
                 <!-- Tour Details -->
@@ -194,346 +144,220 @@
                 </div>
 
                 <!-- Map Viewer -->
-                <div class="map-container relative mb-16 lg:mb-0 lg:w-2/3 h-[550px] flex justify-center animate-slide-in-bottom">
+               <div class="map-container relative w-full lg:w-2/3 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:h-[550px] flex justify-center">
                     <div id="map" class="w-full h-full rounded-lg border border-gray-300 shadow-md"></div>
+
                     <!-- Floating Info Box -->
                     <div id="map-info" class="hidden">
-                        <h4 id="map-info-title" class="text-lg font-semibold text-blue-800">Tour Information</h4>
-                        <p id="map-info-description" class="text-gray-600 mt-2">Select a location to view details.</p>
-                        <img id="map-info-image" src="" alt="Tour Image" class="rounded-lg mt-4 hidden">
+                        <div class="relative">
+                             <button id="prev-btn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"></button>
+                            <div id="map-info-image-container" class="overflow-hidden max-h-[350px]">
+                                <!-- Images will be inserted here dynamically -->
+                            </div>
+                            <button id="next-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"></button>
+                        </div>
+                        <h4 id="map-info-title" class="text-lg font-semibold text-blue-800 font-Eczar"></h4>
+                        <p id="map-info-description" class="text-gray-600 mt-2 font-Anek"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Include Leaflet CSS and JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!--‹› -->
 
-    <script>
-        // Initialize the map
-        let map;
-        let markers = [];
+<section id="experience" class="w-full py-16 text-white font-['Raleway'] relative overflow-hidden">
+    <!-- Background Video -->
+    <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
+        <source src="{{ asset('videos/revback.MP4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-        function initializeMap(lat, lng) {
-            if (map) {
-                map.remove(); // Remove the existing map if it exists
-            }
-            map = L.map('map').setView([lat, lng], 13); // Set initial view
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-        }
+    <!-- Text Container -->
+    <div class="relative z-10 text-center px-4 md:px-12">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-Eczar mb-8 md:mb-10" data-aos="fade-down">
+            What Our Travelers Experience in Palawan
+        </h2>
+    </div>
 
-        // JavaScript to handle tour item clicks
-        document.querySelectorAll('.tour-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const tour = this.getAttribute('data-tour');
-                showTourDetails(tour);
-            });
-        });
-
-        // Function to show tour details and map
-        function showTourDetails(tour) {
-            // Hide the tours grid
-            document.querySelector('.grid').classList.add('hidden');
-
-            // Show the tour details and map section
-            document.getElementById('tour-details').classList.remove('hidden');
-
-            // Show the back button
-            document.getElementById('back-button').classList.remove('hidden');
-
-            // Fetch and display tour details
-            const tourDetailsContent = document.getElementById('tour-details-content');
-            const tourData = getTourData(tour); // Fetch tour data dynamically
-
-            tourDetailsContent.innerHTML = `
-                <div class="flex flex-col h-full overflow-hidden">
-                    <div class="h-1/2 relative overflow-hidden">
-                        <button id="close-tour-image" class="absolute top-2 left-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors z-10">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                        <img src="{{ asset('${tourData.image}') }}" alt="${tour}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    </div>
-                    <div class="h-1/2 flex mt-6 flex-col group-hover:translate-x-8 transition-transform duration-300">
-                        <h3 class="text-3xl font-Eczar font-extrabold mt-2 mb-4">${tourData.title}</h3>
-                        <p class="text-[#040823] text-s mb-6 font-Anek">${tourData.description}</p>
-                        <div class="flex-grow text-[#040823] font-Anek">
-                            ${tourData.subTours.map(subTour => `
-                                <p class="sub-tour cursor-pointer hover:bg-gray-800 hover:text-white transition text-gray-700 flex items-center justify-between"
-                                    data-lat="${subTour.lat}"
-                                    data-lng="${subTour.lng}"
-                                    data-image="${subTour.image}"
-                                    data-description="${subTour.description}"
-                                    data-tour="${tour}">
-                                    ${subTour.name} <span class="ml-2">➔</span>
-                                </p>
-                            `).join('')}
-                        </div>
+    <div class="relative flex flex-col items-center w-full mt-6 md:mt-12">
+        <div class="relative flex items-center w-full">
+            <!-- Prev Button -->
+            <button class="absolute left-2 sm:left-4 z-10 bg-white/20 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="prevReview">
+                &#9664;
+            </button>
+            
+            <!-- Review Container -->
+            <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
+                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                    <div class="absolute top-0 left-0 w-full h-full">
+                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                            <source src="{{ asset('videos/rev3.MP4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
-            `;
 
-            // Initialize the map with the first sub-tour's coordinates
-            initializeMap(tourData.subTours[0].lat, tourData.subTours[0].lng);
+                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                    <div class="absolute top-0 left-0 w-full h-full">
+                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                            <source src="{{ asset('videos/rev4.MP4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
 
-            // Add markers for all sub-tours
-            markers.forEach(marker => marker.remove()); // Clear existing markers
-            markers = [];
-            tourData.subTours.forEach(subTour => {
-                const marker = L.marker([subTour.lat, subTour.lng]).addTo(map)
-                    .on('click', function() {
-                        // Zoom in on the clicked marker
-                        map.setView([subTour.lat, subTour.lng], 15);
+                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                    <div class="absolute top-0 left-0 w-full h-full">
+                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                            <source src="{{ asset('videos/rev5.MP4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>   
+            
+            </div>
+            
+            
+            <!-- Next Button -->
+            <button class="absolute right-2 sm:right-4 z-10 bg-white/20 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="nextReview">
+                &#9654;
+            </button>
+        </div>
+    </div>
+</section>
 
-                        // Update the floating info box
-                        const mapInfo = document.getElementById('map-info');
-                        mapInfo.classList.remove('hidden');
-                        document.getElementById('map-info-title').textContent = subTour.name;
-                        document.getElementById('map-info-description').textContent = subTour.description;
-                        document.getElementById('map-info-image').src = subTour.image;
-                        document.getElementById('map-info-image').classList.remove('hidden');
-                    });
-                markers.push(marker);
-            });
+<!-- Portrait 
 
-            // Add event listeners to sub-tours
-            document.querySelectorAll('.sub-tour').forEach(subTour => {
-                subTour.addEventListener('click', function() {
-                    const lat = parseFloat(this.getAttribute('data-lat'));
-                    const lng = parseFloat(this.getAttribute('data-lng'));
-                    const image = this.getAttribute('data-image');
-                    const description = this.getAttribute('data-description');
-                    const name = this.textContent.trim();
+<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-md bg-[#080c24] p-6 rounded-2xl shadow-lg transform transition-all scale-95 hover:scale-100 duration-300">
+        <button id="closeModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
+            &times;
+        </button>
+        <video id="modalVideo" class="w-full aspect-[9/16] object-cover rounded-lg shadow-lg" controls autoplay>
+        </video>
+    </div>
+</div>-->
 
-                    // Update the map view to the selected sub-tour's coordinates
-                    map.setView([lat, lng], 15);
 
-                    // Show the floating info box
-                    const mapInfo = document.getElementById('map-info');
-                    mapInfo.classList.remove('hidden');
-                    document.getElementById('map-info-title').textContent = name;
-                    document.getElementById('map-info-description').textContent = description;
-                    document.getElementById('map-info-image').src = image;
-                    document.getElementById('map-info-image').classList.remove('hidden');
-                });
-            });
 
-            // Close tour image button
-            document.getElementById('close-tour-image').addEventListener('click', () => {
-                document.getElementById('tour-details').classList.add('hidden');
-                document.querySelector('.grid').classList.remove('hidden');
-            });
-        }
+<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+    <div class="relative w-full max-w-4xl transform transition-all scale-95 hover:scale-100 duration-300">
+        <button id="closeModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
+            &times;
+        </button>
+        <video id="modalVideo" class="w-full aspect-[16/9] object-cover rounded-lg shadow-lg" controls autoplay>
+        </video>
+    </div>
+</div> 
 
-        // Function to fetch tour data (replace with your actual data)
-        function getTourData(tour) {
-            const tours = {
-                tourA: {
-                    title: "El Nido Palawan Tour A",
-                    description: "Experience the stunning beauty of El Nido's most iconic destinations.",
-                    image: "images/seven-commandos.jpg",
-                    subTours: [
-                        { name: "7 Commandos Beach", lat: 11.17370, lng: 119.37784, image: "images/seven-commandos.jpg", description: "A beautiful white sand beach with crystal clear waters." },
-                        { name: "Small Lagoon", lat: 11.14579, lng: 119.31259, image: "images/small-lagoon.webp", description: "A serene lagoon perfect for kayaking." },
-                        { name: "Big Lagoon", lat: 11.15443, lng: 119.32095, image: "images/big-lagoon.webp", description: "A grand lagoon surrounded by towering cliffs." },
-                        { name: "Secret Lagoon", lat: 11.14622, lng: 119.31328, image: "images/secret-lagoon.jpg", description: "A hidden gem accessed through a small entrance." },
-                        { name: "Shimizu Island", lat: 11.138566, lng: 119.318315, image: "images/shimizu-island.jpg", description: "A vibrant snorkeling spot with rich marine life." }
-                    ]
-                },
-                tourB: {
-                    title: "El Nido Palawan Tour B",
-                    description: "Discover hidden caves and pristine beaches on this exciting island-hopping adventure.",
-                    image: "images/pinagbuyutan-island.webp",
-                    subTours: [
-                        { name: "Entalula Island", lat: 11.12877, lng: 119.33565, image: "images/entalula-island.jpg", description: "A scenic view of the island." },
-                        { name: "Pinagbuyutan Island", lat: 11.12252, lng: 119.39172, image: "images/pinagbuyutan-island.webp", description: "Known for its crystal clear waters and sandy beaches." },
-                        { name: "Cathedral Cave", lat: 11.07664, lng: 119.38458, image: "images/cathedral-cave.jpg", description: "Famous for its grand cave formations." },
-                        { name: "Snake Island", lat: 11.09395, lng: 119.33859, image: "images/snake-island.jpg", description: "A beautiful snake-shaped island." },
-                        { name: "Cudugnon Cave", lat: 11.08486, lng: 119.35261, image: "images/cudugnon-cave.jpg", description: "A quiet beach perfect for relaxation." }
-                    ]
-                },
-                tourC: {
-                    title: "El Nido Palawan Tour C",
-                    description: "Explore hidden beaches and stunning rock formations on this unforgettable journey.",
-                    image: "images/hidden-beach.webp",
-                    subTours: [
-                        { name: "Hidden Beach", lat: 11.20611, lng: 119.39172, image: "images/hidden-beach.webp", description: "A peaceful and secluded beach with crystal-clear water." },
-                        { name: "Secret Beach", lat: 11.20903, lng: 119.39691, image: "images/secret-beach.jpg", description: "A secret cove with a sandy beach surrounded by cliffs." },
-                        { name: "Matinloc Shrine", lat: 11.18261, lng: 119.41407, image: "images/matinloc-shrine.jpg", description: "A historic shrine offering panoramic views of the island." },
-                        { name: "Talisay Beach", lat: 11.15877, lng: 119.37512, image: "images/talisay-beach.jpg", description: "A tranquil beach perfect for swimming and relaxing." },
-                        { name: "Helicopter Island", lat: 11.21487, lng: 119.36544, image: "images/helicopter-island.jpg", description: "An island known for its helicopter-shaped rock formations." }
-                    ]
-                },
 
-                tourD: {
-                    title: "El Nido Palawan Tour D",
-                    description: "Experience the tranquil beauty of secluded beaches and pristine lagoons.",
-                    image: "images/cadlao-lagoon.jpg",
-                    subTours: [
-                        { name: "Cadlao Lagoon", lat: 11.17983, lng: 119.36319, image: "images/cadlao-lagoon.jpg", description: "A serene lagoon surrounded by towering limestone cliffs." },
-                        { name: "Pasandigan Beach", lat: 11.17983, lng: 119.37495, image: "images/pasandigan-beach.jpg", description: "A peaceful beach with clear water, perfect for a swim." },
-                        { name: "Natnat Beach", lat: 11.18331, lng: 119.37593, image: "images/natnat-beach.jpg", description: "A secluded beach with golden sand and crystal-clear water." },
-                        { name: "Pinagbuyutan Island", lat: 11.17038, lng: 119.37162, image: "images/pinagbuyutan-island.jpg", description: "A tropical paradise with stunning beaches and picturesque landscapes." },
-                        { name: "Dolarog Beach", lat: 11.17765, lng: 119.38083, image: "images/dolarog-beach.jpg", description: "A quiet beach offering beautiful views of the surrounding islands." }
-                    ]
-                }
-            };
-            return tours[tour];
-        }
-    </script>
 
-<!-- Contact Section -->
-<div class="w-full h-auto bg-[#10194a] flex flex-col items-center justify-center text-center p-10 relative font-Anek">
-    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 font-Eczar mt-10">Choose Your Perfect Adventure!</h1>
-    <p class="text-white mb-6 max-w-2xl px-4">
+
+    <div id="contact" class="w-full min-h-screen flex flex-col items-center justify-center text-center p-10 bg-[#10194a] relative font-Anek">
+    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 pt-[30px] font-Eczar" data-aos="fade-down">
+        Choose Your Perfect Adventure!
+    </h1>
+    <p class="text-white mb-6 max-w-2xl" data-aos="fade-down" data-aos-delay="200">
         Explore El Nido with our four amazing tours! From island hopping to hidden lagoons, pristine beaches, and stunning sunset cruises—your perfect adventure awaits. Get in touch today!
     </p>
 
-    <!-- Display Success Message -->
     @if (session('success'))
-        <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl">
+        <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
             {{ session('success') }}
         </div>
     @endif
 
-    <!-- Display Error Message -->
     @if (session('error'))
-        <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl">
+        <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
             {{ session('error') }}
         </div>
     @endif
 
-    <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl mt-[-40px] p-2">
+    <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl p-2">
         @csrf
         <!-- Full Name -->
-        <div class="text-left">
+        <div class="text-left" data-aos="fade-left">
             <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Full Name*" required>
             <p id="nameError" class="text-red-500 text-sm hidden mt-2"></p>
         </div>
         
         <!-- Phone & Email -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-            <div>
+            <div data-aos="fade-right">
                 <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Phone Number*" required>
                 <p id="phoneError" class="text-red-500 text-sm hidden mt-2"></p>
             </div>
-            <div>
+            <div data-aos="fade-left">
                 <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Email Address*" required>
                 <p id="emailError" class="text-red-500 text-sm hidden mt-2"></p>
             </div>
         </div>
 
         <!-- Message -->
-        <div class="text-left">
+        <div class="text-left" data-aos="fade-left">
             <textarea id="message" name="message" rows="4" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Enter your message..." required></textarea>
             <p id="messageError" class="text-red-500 text-sm hidden mt-2"></p>
         </div>
 
         <!-- Submit Button -->
         <div class="flex justify-end">
-            <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105">
+            <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105" data-aos="zoom-in">
                 Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
             </button>
         </div>
     </form>
 </div>
 
-    <!-- Footer Section -->
-    <div class="w-full bg-[#080c24] text-white py-10 px-6">
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Branding -->
-            <div>
-                <h2 class="text-4xl md:text-5xl font-bold font-Eczar mr-20">Neptune Tours and Travels</h2>
-            </div>
-            
-            <!-- Call Us -->
-            <div>
-                <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
-                <p>+63 917 158 3266</p>
-            </div>
-            
-            <!-- Email Us -->
-            <div>
-                <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
-                <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white">neptunetravel.tours@gmail.com</a></p>
-            </div>
-            
-            <!-- Social Media -->
-            <div class="flex flex-col items-center">
-                <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-6 h-6">
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6">
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-110">
-                        <img src="https://www.citypng.com/public/uploads/preview/tik-tok-logo-icon-701751694793267gxetcvvp3v.png" alt="TikTok" class="w-6 h-6">
-                    </a>
-                </div>
+<!-- Footer Section -->
+<div id="footer" class="w-full bg-[#080c24] text-white py-10 px-6 overflow-hidden">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Branding -->
+        <div data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold font-Eczar mr-0 md:mr-20">Neptune Tours and Travels</h2>
+        </div>
+        
+        <!-- Call Us -->
+        <div data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
+            <p>+63 917 158 3266</p>
+        </div>
+        
+        <!-- Email Us -->
+        <div data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
+            <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white">neptunetravel.tours@gmail.com</a></p>
+        </div>
+        
+        <!-- Social Media -->
+        <div class="flex flex-col" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
+            <div class="flex space-x-4 mt-2">
+                <a href="https://www.facebook.com/NeptuneToursandTravelElNidoPalawan" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-6 h-6">
+                </a>
+                <a href="https://www.instagram.com/neptunetoursandtravelofficial/" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6">
+                </a>
+                <a href="https://www.tiktok.com/@neptunetoursandtravel" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                    <img src="https://www.citypng.com/public/uploads/preview/tik-tok-logo-icon-701751694793267gxetcvvp3v.png" alt="TikTok" class="w-6 h-6">
+                </a>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Scroll Animations using AOS (Animate on Scroll) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+    var baseAssetUrl = "{{ asset('') }}";
     </script>
-
-<!-- JavaScript Validation -->
-<script>
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-        let isValid = true;
-
-        // Validation function
-        function validateField(input, errorElement, condition, errorMessage) {
-            if (condition) {
-                errorElement.textContent = errorMessage;
-                errorElement.classList.remove('hidden');
-                errorElement.setAttribute('aria-hidden', 'false');
-                isValid = false;
-            } else {
-                errorElement.textContent = '';
-                errorElement.classList.add('hidden');
-                errorElement.setAttribute('aria-hidden', 'true');
-            }
-        }
-
-        // Name validation
-        const nameInput = document.getElementById('name');
-        const nameError = document.getElementById('nameError');
-        validateField(nameInput, nameError, nameInput.value.trim() === '', 'Full Name is required.');
-
-        // Email validation
-        const emailInput = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        validateField(emailInput, emailError, !emailPattern.test(emailInput.value.trim()), 'Enter a valid email address.');
-
-        // Phone validation (must be exactly 11 digits)
-        const phoneInput = document.getElementById('phone');
-        const phoneError = document.getElementById('phoneError');
-        const phonePattern = /^[0-9]{11}$/;
-        validateField(phoneInput, phoneError, !phonePattern.test(phoneInput.value.trim()), 'Enter a valid phone number (exactly 11 digits).');
-
-
-        // Message validation (min 8 characters)
-        const messageInput = document.getElementById('message');
-        const messageError = document.getElementById('messageError');
-        validateField(messageInput, messageError, messageInput.value.trim().length < 8, 'Message must be at least 8 characters long.');
-
-        // Prevent form submission if invalid
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
+    <script>
+    window.App = {
+        baseUrl: "{{ url('/') }}"
+    };
 </script>
+
 </body>
 </html>
