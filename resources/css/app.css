@@ -176,7 +176,7 @@ section {
         flex-grow: 1;
     }
 
-/*Mobile View */
+    /*Mobile View */
 
     @media (max-width: 768px) {          
         .map-container {
@@ -222,6 +222,7 @@ section {
             max-width: 100%;
             max-height: 150px;
         }
+       
     }
     
 
@@ -243,4 +244,5 @@ section {
         width: 100%; 
         height: 550px;
     }
+    
 }

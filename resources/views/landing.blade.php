@@ -14,8 +14,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
 
-
-    
     <title>Landing Page</title>
     @vite('resources/css/app.css')
     @vite(['resources/js/app.js'])
@@ -77,8 +75,8 @@
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour A</h3>
                         <p class="text-l font-Anek mt-4">Experience the stunning beauty of El Nido's most iconic destinations.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
-                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg explore-trip-button" href="#explore">
+                         Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
@@ -92,8 +90,8 @@
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour B</h3>
                         <p class="text-l font-Anek mt-4">Discover hidden caves and pristine beaches on this exciting island-hopping adventure.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
-                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg explore-trip-button" href="#explore">
+                        Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
@@ -107,8 +105,8 @@
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour C</h3>
                         <p class="text-l font-Anek mt-4">Explore hidden beaches and stunning rock formations on this unforgettable journey.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
-                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg explore-trip-button" href="#explore">
+                         Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
@@ -122,8 +120,8 @@
                     <div class="text-black p-[4px]">
                         <h3 class="text-3xl font-Eczar font-extrabold mt-6">El Nido, Palawan Tour D</h3>
                         <p class="text-l font-Anek mt-4">Experience the tranquil beauty of secluded beaches and pristine lagoons.</p>
-                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg">
-                            Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                        <button class="mt-8 px-6 py-3 border border-[#040823] text-[#040823] hover:text-white rounded-md transition-all duration-300 hover:bg-[#040823] hover:border-[#040823] font-Anek hover:scale-105 hover:shadow-lg explore-trip-button" href="#explore">
+                         Explore Trip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
                         </button>
                     </div>
                 </div>
@@ -137,7 +135,7 @@
                 </button>
 
                 <!-- Tour Details -->
-                <div class="lg:w-1/3 h-[550px]">
+                <div class="lg:w-1/3 min-h-[550px]">
                     <div id="tour-details-content" class="relative overflow-visible h-full touch-pan-x">
                         <!-- Tour details will be dynamically inserted here -->
                     </div>

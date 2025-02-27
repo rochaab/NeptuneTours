@@ -499,6 +499,25 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+         // Smooth scrolling for "Explore Trip" buttons
+         const exploreButtons = document.querySelectorAll('.explore-trip-button');
+         exploreButtons.forEach(button => {
+             button.addEventListener('click', function (event) {
+                 event.preventDefault();
+                 const targetId = this.getAttribute('href').substring(1);
+                 const targetElement = document.getElementById(targetId);
+                 if (targetElement) {
+                     targetElement.scrollIntoView({
+                         behavior: 'smooth',
+                         block: 'start'
+                     });
+                 }
+             });
+         });
+     
+     
+
+
 function resizeMap() {
     let mapContainer = document.getElementById("map");
     if (window.innerWidth < 640) {
