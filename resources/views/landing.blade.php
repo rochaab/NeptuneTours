@@ -251,85 +251,83 @@
 </div> 
 
 
-
-
-    <div id="contact" class="w-full min-h-screen flex flex-col items-center justify-center text-center p-10 bg-[#10194a] relative font-Anek">
-    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 pt-[30px] font-Eczar" data-aos="fade-down">
+<div id="contact" class="w-full min-h-[722px] flex flex-col items-center justify-center text-center bg-[#10194a] relative font-Anek px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 pt-[28px] font-Eczar" data-aos="fade-down">
         Choose Your Perfect Adventure!
     </h1>
-    <p class="text-white mb-6 max-w-2xl" data-aos="fade-down" data-aos-delay="200">
+    <p class="text-white max-w-2xl text-sm sm:text-base px-4 mb-4" data-aos="fade-down" data-aos-delay="200">
         Explore El Nido with our four amazing tours! From island hopping to hidden lagoons, pristine beaches, and stunning sunset cruises—your perfect adventure awaits. Get in touch today!
     </p>
 
     @if (session('success'))
-        <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
+        <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl text-sm sm:text-base" data-aos="fade-up">
             {{ session('success') }}
         </div>
     @endif
 
     @if (session('error'))
-        <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
+        <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl text-sm sm:text-base" data-aos="fade-up">
             {{ session('error') }}
         </div>
     @endif
 
-    <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl p-2">
-        @csrf
-        <!-- Full Name -->
-        <div class="text-left" data-aos="fade-left">
-            <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Full Name*" required>
-            <p id="nameError" class="text-red-500 text-sm hidden mt-2"></p>
+    <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="w-full max-w-6xl p-2">
+    @csrf
+    <!-- Full Name -->
+    <div class="text-left mb-6" data-aos="fade-left"> <!-- Added mb-6 for spacing -->
+        <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Full Name*" required>
+        <p id="nameError" class="text-red-500 text-sm hidden mt-2"></p>
+    </div>
+    
+    <!-- Phone & Email -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mb-6" data-aos="fade-right"> <!-- Added mb-6 for spacing -->
+        <div>
+            <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Phone Number*" required>
+            <p id="phoneError" class="text-red-500 text-sm hidden mt-2"></p>
         </div>
-        
-        <!-- Phone & Email -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-            <div data-aos="fade-right">
-                <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Phone Number*" required>
-                <p id="phoneError" class="text-red-500 text-sm hidden mt-2"></p>
-            </div>
-            <div data-aos="fade-left">
-                <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Email Address*" required>
-                <p id="emailError" class="text-red-500 text-sm hidden mt-2"></p>
-            </div>
+        <div data-aos="fade-left">
+            <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email Address*" required>
+            <p id="emailError" class="text-red-500 text-sm hidden mt-2"></p>
         </div>
+    </div>
 
-        <!-- Message -->
-        <div class="text-left" data-aos="fade-left">
-            <textarea id="message" name="message" rows="4" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Enter your message..." required></textarea>
-            <p id="messageError" class="text-red-500 text-sm hidden mt-2"></p>
-        </div>
+    <!-- Message -->
+    <div class="text-left mb-6" data-aos="fade-left"> <!-- Added mb-6 for spacing -->
+        <textarea id="message" name="message" rows="4" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your message..." required></textarea>
+        <p id="messageError" class="text-red-500 text-sm hidden mt-2"></p>
+    </div>
 
-        <!-- Submit Button -->
-        <div class="flex justify-end">
-            <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105" data-aos="zoom-in">
-                Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
-            </button>
-        </div>
-    </form>
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+        <button type="submit" class="w-full md:w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" data-aos="zoom-in">
+            Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+        </button>
+    </div>
+</form>
 </div>
 
 <!-- Footer Section -->
-<div id="footer" class="w-full bg-[#080c24] text-white py-10 px-6 overflow-hidden">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+<div id="footer" class="w-full bg-[#080c24] text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mr-12">
         <!-- Branding -->
-        <div data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold font-Eczar mr-0 md:mr-20">Neptune Tours and Travels</h2>
+        <div>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-Eczar">Neptune Tours and Travels</h2>
         </div>
         
         <!-- Call Us -->
-        <div data-aos="fade-up" data-aos-delay="100">
+        <div>
             <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
             <p>+63 917 158 3266</p>
         </div>
         
         <!-- Email Us -->
-        <div data-aos="fade-up" data-aos-delay="200">
+        <div>
             <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
-            <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white">neptunetravel.tours@gmail.com</a></p>
+            <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white transition duration-300">neptunetravel.tours@gmail.com</a></p>
         </div>
         
         <!-- Social Media -->
-        <div class="flex flex-col" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex flex-col">
             <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
             <div class="flex space-x-4 mt-2">
                 <a href="https://www.facebook.com/NeptuneToursandTravelElNidoPalawan" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
