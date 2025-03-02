@@ -134,7 +134,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                     const description = this.getAttribute('data-description');
                     const name = this.textContent.trim();
                     const offsetLng = -0.005;
-                    map.setView([lat, lng - offsetLng], 16);
+                    map.setView([lat, lng - offsetLng], 15);
                     updateMapInfo({ name, description, images });
                 });
             });
@@ -194,7 +194,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
         }
         
         
-        // Function to fetch tour data (replace with your actual data)
+        // Function to fetch tour data 
         function getTourData(tour) {
             const tours = {
                 tourA: {
@@ -225,8 +225,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                         },
                         { 
                             name: "Secret Lagoon", 
-                            lat: 11.14622, 
-                            lng: 119.31328, 
+                            lat: 11.145601607239213, 
+                            lng: 119.31272008916551, 
                             images: "images/secret-lagoon.jpg", // Single image as a string
                             description: "A hidden gem accessed through a small entrance."
                         },
@@ -288,8 +288,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                     subTours: [
                         { 
                             name: "Hidden Beach", 
-                            lat: 11.190456288168928, 
-                            lng:  119.2835603912837, 
+                            lat: 11.189894517010632, 
+                            lng:  119.28248769318553, 
                             images: "images/hidden-beach.webp", // Single image as a string
                             description: "A peaceful and secluded beach with crystal-clear water."
                         },
@@ -309,15 +309,15 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                         },
                         { 
                             name: "Talisay Beach", 
-                            lat: 11.195592371278137,
-                            lng:  119.27150117902507, 
+                            lat: 11.194934034263463,
+                            lng:  119.27143996231436, 
                             images: "images/talisay-beach.webp", // Single image as a string
                             description: "A tranquil beach perfect for swimming and relaxing."
                         },
                         { 
                             name: "Helicopter Island", 
-                            lat: 11.201241624115156, 
-                            lng:  119.33809779425236, 
+                            lat: 11.197608545032494, 
+                            lng:   119.33920203839347, 
                             images: "images/helicopter-island.jpg", // Single image as a string
                             description: "An island known for its helicopter-shaped rock formations."
                         }
@@ -339,28 +339,28 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                             name: "Pasandigan Beach", 
                             lat: 11.208240073503626,
                             lng: 119.35747373283168,
-                            images: "images/pasandigan-beach.jpg", // Single image as a string
+                            images: "images/paradise-beach.jpg", // Single image as a string
                             description: "A peaceful beach with clear water, perfect for a swim."
                         },
                         { 
                             name: "Natnat Beach", 
                             lat: 11.20571163640752,
                             lng:  119.36389914271139, 
-                            images: "images/natnat-beach.jpg", // Single image as a string
+                            images: "images/nat-nat-beach.webp", // Single image as a string
                             description: "A secluded beach with golden sand and crystal-clear water."
                         },
                         { 
-                            name: "Pinagbuyutan Island", 
+                            name: "Bukal Island", 
                             lat: 11.12206257172957,
                             lng:  119.3916666473056, 
-                            images: "images/pinagbuyutan-island.jpg", // Single image as a string
+                            images: "images/bukal-island.jpg",// Single image as a string
                             description: "A tropical paradise with stunning beaches and picturesque landscapes."
                         },
                         { 
-                            name: "Dolarog Beach", 
+                            name: "Paradise Beach", 
                             lat: 11.134455682164148, 
                             lng:  119.39865960149385, 
-                            images: "images/dolarog-beach.jpg", // Single image as a string
+                            images: "images/paradise-beach.jpg", // Single image as a string
                             description: "A quiet beach offering beautiful views of the surrounding islands."
                         }
                     ]
@@ -372,3 +372,264 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
         AOS.init({
             once: false, // Animation will repeat when re-entering viewport
         });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // ---  Elements Selection --- 
+            const reviewContainer = document.getElementById('reviewContainer');
+            const prevReview = document.getElementById('prevReview');
+            const nextReview = document.getElementById('nextReview');
+            const imageReviewContainer = document.getElementById('imageReviewContainer');
+            const prevImage = document.getElementById('prevImage');
+            const nextImage = document.getElementById('nextImage');
+            const backgroundVideo = document.getElementById('backgroundVideo');
+            const reviewVideos = document.querySelectorAll('.review-video');
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModal = document.getElementById('closeModal');
+        
+            if (!reviewContainer || !prevReview || !nextReview || !imageReviewContainer || !prevImage || !nextImage || !videoModal || !modalVideo || !closeModal) {
+                console.error("One or more required elements not found in the DOM.");
+                return;
+            }
+        
+            // ---  Pause all other videos when a new one starts --- 
+            function pauseAllVideos() {
+                reviewVideos.forEach(video => {
+                    if (video && !video.paused) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                });
+            }
+        
+            // ---  Hover Effect: Change Background Video & Play on Hover (with safety check) --- 
+            let hoverTimeout;
+            reviewVideos.forEach((video) => {
+                video.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = setTimeout(() => {
+                        pauseAllVideos(); // ---  Stop all videos before playing a new one --- 
+                        
+                        const videoSrc = video.querySelector('source')?.getAttribute('src');
+                        if (backgroundVideo && videoSrc && backgroundVideo.src !== videoSrc) {
+                            backgroundVideo.src = videoSrc;
+                            backgroundVideo.load();
+                            backgroundVideo.play().catch(() => {});
+                        }
+                        if (video) {
+                            video.play().catch(() => {});
+                        }
+                    }, 200);
+                });
+        
+                video.addEventListener('mouseleave', () => {
+                    clearTimeout(hoverTimeout);
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                    if (backgroundVideo) {
+                        backgroundVideo.pause();
+                        backgroundVideo.currentTime = 0;
+                    }
+                });
+            });
+        
+            // ---  Modal Video Click (Prevents multiple videos playing in modal) --- 
+            reviewVideos.forEach((video) => {
+                video.addEventListener('click', (e) => {
+                    const videoElement = e.target.closest('.review-video');
+                    const videoSrc = videoElement?.querySelector('source')?.getAttribute('src');
+        
+                    if (videoSrc) {
+                        pauseAllVideos(); // ---  Stop all videos before opening modal --- 
+                        modalVideo.src = videoSrc;
+                        modalVideo.load();
+                        modalVideo.muted = true;
+                        modalVideo.play().then(() => {
+                            modalVideo.muted = false;
+                        }).catch(() => {
+                            modalVideo.controls = true;
+                        });
+        
+                        videoModal.classList.remove('hidden');
+                        videoModal.style.display = "flex";
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+        
+            // --- Close Modal (Ensure video resets properly) --- 
+            function closeVideoModal() {
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.removeAttribute('src');
+                    modalVideo.controls = false;
+                }
+                videoModal.classList.add('hidden');
+                videoModal.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        
+            closeModal.addEventListener('click', closeVideoModal);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeVideoModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape") closeVideoModal();
+            });
+        
+            // --- Carousel Scroll for Reviews --- 
+            const scrollAmount = 230;
+            nextReview.addEventListener('click', () => {
+                reviewContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+            prevReview.addEventListener('click', () => {
+                reviewContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        
+            // --- Carousel Scroll for Images --- 
+            nextImage.addEventListener('click', () => {
+                imageReviewContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+            prevImage.addEventListener('click', () => {
+                imageReviewContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        
+            // --- Enable Autoplay After User Interaction --- 
+            document.body.addEventListener('click', function enableAutoplay() {
+                if (modalVideo) {
+                    modalVideo.play().catch(() => {});
+                }
+                document.body.removeEventListener('click', enableAutoplay);
+            }, { once: true });
+        
+            // ---  Image Carousel Functionality --- 
+            const images = imageReviewContainer.querySelectorAll('div');
+            let currentIndex = 0;
+        
+            nextImage.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+        
+            prevImage.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+        });
+
+          // ---  Smooth scrolling for "Explore Trip" buttons --- 
+    const exploreButtons = document.querySelectorAll('.explore-trip-button');
+    exploreButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+
+function resizeMap() {
+    let mapContainer = document.getElementById("map");
+    if (window.innerWidth < 640) {
+        mapContainer.style.height = "300px"; // ---  Adjust height for mobile --- 
+    } else {
+        mapContainer.style.height = "550px"; // ---  Default height for desktop --- 
+    }
+}
+window.addEventListener("resize", resizeMap);
+resizeMap(); // ---  Call once to set initial size --- 
+
+
+
+/* ---  for buttons image and videos transition (Desktop and Mobile) ---  */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const videoContainer = document.getElementById("videoContainer");
+    const imageContainer = document.getElementById("imageContainer");
+    const showVideos = document.getElementById("showVideos");
+    const showImages = document.getElementById("showImages");
+
+    showVideos.addEventListener("click", function () {
+        videoContainer.classList.remove("hidden");
+        videoContainer.classList.add("active");
+        imageContainer.classList.remove("active");
+        imageContainer.classList.add("hidden");
+    });
+
+    showImages.addEventListener("click", function () {
+        imageContainer.classList.remove("hidden");
+        imageContainer.classList.add("active");
+        videoContainer.classList.remove("active");
+        videoContainer.classList.add("hidden");
+    });
+});
+
+/* ---  image buttons prev and next (Desktop) ---  */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const imageReviewContainer = document.getElementById('imageReviewContainer');
+    const images = imageReviewContainer.querySelectorAll('div');
+    let currentIndex = 0;
+
+    function updateImageVisibility() {
+        images.forEach((img, index) => {
+            img.classList.toggle('hidden', index !== currentIndex);
+        });
+    }
+
+    document.getElementById('nextImage').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImageVisibility();
+    });
+
+    document.getElementById('prevImage').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImageVisibility();
+    });
+
+    // --- Ensure the first image is visible when the page loads ---
+    updateImageVisibility();
+});
+
+
+/* --- Modal for close and Image --- */
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll("#imageReviewContainer img");
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeImageModal");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                modalImage.src = this.src;
+                modal.classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        closeModal.addEventListener("click", function () {
+            modal.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        });
+
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+                modal.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        });
+    });
+
+

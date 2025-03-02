@@ -30,10 +30,12 @@
             </button>
 
             <!-- Navigation Menu -->
-            <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"" aria-label="Primary menu">
+            <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"aria-label="Primary menu">
                 <ul class="flex justify-start space-x-20">
                     <li class="menu-item"><a href="#explore" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    <li class="menu-item"><a href="#experience" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
                     <li class="menu-item"><a href="#contact" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                    <li class="menu-item"><a href="#footer" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>
                 </ul>
             </nav>
         </div>
@@ -51,7 +53,9 @@
                 <div class="h-full flex items-center justify-center">
                     <ul class="space-y-4 text-center">
                         <li><a href="#explore" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                        <li><a href="#experience" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
                         <li><a href="#contact" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                        <li><a href="#footer" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>
                     </ul>
                 </div>
             </div>
