@@ -374,6 +374,8 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
         });
 
 
+
+
         document.addEventListener('DOMContentLoaded', function () {
             // ---  Elements Selection --- 
             const reviewContainer = document.getElementById('reviewContainer');
@@ -632,4 +634,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+
+    
+/* --- Refreshes the sections when clicked --- */
+
+
+    document.querySelectorAll('.explore-trip-button').forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(() => {
+                AOS.refreshHard();
+            }, 500);
+        });
+    });
+
+
+    
 

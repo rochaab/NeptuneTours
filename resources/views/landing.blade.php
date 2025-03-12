@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
 
     <title>Landing Page</title>
     @vite('resources/css/app.css')
@@ -162,6 +163,7 @@
     </div>
 </div>
 
+<!--‹› -->
 
 <section id="experience" class="w-full py-16 text-white font-['Raleway'] relative overflow-hidden">
     <!-- Background Video -->
@@ -367,27 +369,31 @@
 </div>
 
 <!-- Footer Section -->
-<div id="footer" class="w-full bg-[#080c24] text-white py-10 px-6 overflow-hidden">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+<div id="footer" class="w-full bg-[#080c24] text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-x-16 text-left">
         <!-- Branding -->
         <div data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold font-Eczar mr-0 md:mr-20">Neptune Tours and Travels</h2>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-Eczar">Neptune Tours and Travels</h2>
         </div>
-        
+
         <!-- Call Us -->
         <div data-aos="fade-up" data-aos-delay="100">
             <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
             <p>+63 917 158 3266</p>
         </div>
-        
+
         <!-- Email Us -->
         <div data-aos="fade-up" data-aos-delay="200">
             <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
-            <p><a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white">neptunetravel.tours@gmail.com</a></p>
+            <p>
+                <a href="mailto:neptunetravel.tours@gmail.com" class="text-gray-400 hover:text-white transition duration-300">
+                    neptunetravel.tours@gmail.com
+                </a>
+            </p>
         </div>
-        
+
         <!-- Social Media -->
-        <div class="flex flex-col" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="300">
             <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
             <div class="flex space-x-4 mt-2">
                 <a href="https://www.facebook.com/NeptuneToursandTravelElNidoPalawan" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
@@ -404,6 +410,7 @@
     </div>
 </div>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -414,7 +421,6 @@
         baseUrl: "{{ url('/') }}"
     };
 </script>
-
 
 </body>
 </html>
