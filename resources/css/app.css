@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 /* Global Styles */
-html {
+body, html {
+    overflow-x: hidden;
+    width: 100%;
     scroll-behavior: smooth;
 }
 
@@ -39,8 +41,19 @@ section {
 }
 
 /* Map Container Styling */
-#map-container {
-    position: relative;
+
+.map-container {
+    width: 1200%; /* Make sure it takes the correct width */
+    max-width: 1200px; /* Prevent it from stretching too much */
+}
+
+#map {
+    width: 100%; /* Ensure it fits within .map-container */
+    height: 100%;
+    right: -20px; /* Moves it more to the right */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #map-info {
@@ -97,49 +110,7 @@ section {
 }
 
 
-/* Responsive Adjustments for Mobile Devices */
-@media (max-width: 768px) {
-    /* Hide the map on mobile devices */
-    #map {
-        display: none;
-    }
-
-    /* Adjust the map-info section for mobile */
-    #map-info {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: 100%;
-        max-width: 100%;
-        margin-top: 20px;
-        padding: 16px;
-    }
-
-    #map-info img {
-        max-height: 250px;
-    }
-
-    #map-info h4 {
-        font-size: 18px;
-    }
-
-    #map-info p {
-        font-size: 14px;
-    }
-
-    /* Adjust the tour details section for mobile */
-    #tour-details {
-        height: auto;
-        flex-direction: column;
-    }
-
-    .map-container {
-        margin-left: 0;
-        margin-bottom: 20px;
-    }
-
-    /* Adjust the contact form section for mobile */
+ /* Adjust the contact form section for mobile */
     #contactForm {
         margin-top: 10px; /* Reduce margin for mobile */
     }
@@ -171,6 +142,319 @@ section {
     .tour-item button:hover {
         transform: scale(1.05);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+
+    /* --- Hides the scrollbar for all browsers ---*/
+    .scrollbar-hide {
+        scrollbar-width: none; /*--- Firefox ---*/
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* --- Chrome, Safari --- */
+    }
+
+    #videoModal {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #videoModal.open {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    #videoModal.hidden {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .content {
+        flex-grow: 1;
+    }
+
+    /*Mobile View */
+
+    @media (max-width: 768px) {          
+        .map-container {
+        width: 100%; /* ---Full width on mobile---*/
+        min-height: 300px; /* ---Ensures a minimum height--- */
+        height: auto; /*--- Adjusts dynamically--- */
+        top: 20px;
+        right:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+    
+    }
+        #map-info {
+            max-width: 50%; /*--- Ensures it fits within half the screen --- */
+            max-height: 450px; /* --- Prevents it from being too tall --- */ 
+            right: 5%; /*  --- Moves it closer to the right  --- */
+            left: auto; /* --- Prevents forced positioning  --- */
+            top: 10px;
+            bottom: 20px;
+            transform: none;
+            padding: 9px;
+            font-size: 14px;
+        }
+    
+        #map-info h4 {
+            font-size: 18px;
+            margin-top: 12px;
+        }
+    
+        #map-info p {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        #exploreTripButton {
+            pointer-events: none; /* Disables clicking the button */
+            opacity: 0.6; /* Optionally make it look disabled */
+        }
+    
+        #map-info img {
+            max-width: 100%;
+            max-height: 150px;
+        }
+       
+    }
+
+
+
+    /* Responsive Experience Section Mobile */
+@media (max-width: 768px) {
+    #experience {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* --- Ensure text is at the top --- */
+    #experience .text-container {
+        order: -1; 
+        position: relative;
+        padding: 20px;
+        z-index: 10;
+    }
+
+    /* --- Center the video and image container --- */
+    #videoContainer,
+    #imageContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s;
+    }
+
+    /* --- Default visibility states --- */
+    #videoContainer {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #imageContainer {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+
+    /* --- When active, show the image container --- */
+    #imageContainer.active {
+        visibility: visible;
+        opacity: 1;
+        position: relative;
+    }
+
+    /* --- When hidden, fade out the video container --- */
+    #videoContainer.hidden {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+
+    /* --- Adjust buttons for mobile --- */
+    #experience .absolute.top-4.right-4 {
+        position: relative;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    /* --- Adjust review container to prevent horizontal scrolling --- */
+    #reviewContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 10px;
+        justify-content: flex-start; /* --- Ensures proper alignment --- */
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch; /* --- Improves scrolling on iOS --- */
+    }
+    
+
+    /* --- Ensure videos/images scale properly --- */
+    video,
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    /* --- Adjust navigation buttons for review section --- */
+    #prevReview,
+    #nextReview,
+    #prevImage,
+    #nextImage {
+        position: relative;
+        top: 0;
+        transform: none;
+    }
+}
+
+/* --- Desktop Styles for Experience Animation --- */
+
+#videoContainer, #imageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* --- Ensure perfect centering --- */
+    width: 100%;
+    position: relative; /* --- Remove absolute if causing shifts --- */
+    transition: transform 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* --- Default visibility states --- */
+#videoContainer {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#imageContainer {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transform: translateY(10px); /* --- Starts slightly lower --- */
+}
+
+/* --- When active, smoothly show the image container --- */
+#imageContainer.active {
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+    transform: translateY(0);
+}
+
+/* --- When hidden, smoothly fade out the video container --- */
+#videoContainer.hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transform: translateY(-10px); /* --- Moves slightly up while fading --- */
+}
+
+
+
+
+/* --- Mobile Styles button for images and videos ---*/
+@media (max-width: 768px) {
+    .flex.flex-row.justify-center.items-center.gap-6 {
+        gap: 10px;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .flex.flex-row.justify-center.items-center.gap-6 button {
+        padding: 10px 25px;
+        font-size: 14px;
+        height: 45px;
+        border-radius: 30px; /* --- Rounded edges  --- */
+        background: rgba(0, 0, 0, 0.3); /* --- Semi-transparent background --- */
+        color: white; /* --- White text --- */
+        border: none;
+        transition: background 0.3s ease;
+    }
+
+    .flex.flex-row.justify-center.items-center.gap-6 button:hover {
+        background: rgba(0, 0, 0, 0.5); /* --- Darker on hover --- */
+    }
+}
+
+/* --- Desktop Styles Buttons show vids and comments ---*/
+@media (min-width: 769px) {
+    .flex.flex-row.justify-center.items-center.gap-6 {
+        gap: 20px;
+        flex-direction: row;
+        justify-content: center; /* --- Center buttons --- */
+        margin-top: 20px;
+        height: auto;
+        width: 100%;
+    }
+
+    .flex.flex-row.justify-center.items-center.gap-6 button {
+        padding: 12px 35px;
+        font-size: 16px;
+        height: auto;
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        border: none;
+        transition: background 0.3s ease;
+    }
+
+    .flex.flex-row.justify-center.items-center.gap-6 button:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* --- Mobile close button  ---*/
+@media (max-width: 640px) {
+    #closeImageModal {
+        top: -20px;
+        right: 2px;
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+}
+
+    
+
+
+/* Larger Screens (Desktops & Laptops) */
+@media (min-width: 1024px) {
+    .tour-map-container {
+        flex-direction: row; /* --- Side-by-side layout  ---*/
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .tour-details-container {
+        width: 33.33%; /*--- Matches lg:w-1/3 ---*/
+        height: 550px;
+    }
+
+    #map {
+        width: 100%; 
+        height: 550px;
     }
     
 }

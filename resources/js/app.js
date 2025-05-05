@@ -134,7 +134,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                     const description = this.getAttribute('data-description');
                     const name = this.textContent.trim();
                     const offsetLng = -0.005;
-                    map.setView([lat, lng - offsetLng], 16);
+                    map.setView([lat, lng - offsetLng], 15);
                     updateMapInfo({ name, description, images });
                 });
             });
@@ -194,47 +194,50 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
         }
         
         
-        // Function to fetch tour data (replace with your actual data)
+        // Function to fetch tour data 
         function getTourData(tour) {
             const tours = {
                 tourA: {
                     title: "El Nido Palawan Tour A",
                     description: "Experience the stunning beauty of El Nido's most iconic destinations.",
-                    image: "images/seven-commandos.jpg",
+                    image: "images/tourA/7commando.png",
                     subTours: [
                         { 
                             name: "7 Commandos Beach", 
                             lat: 11.17370, 
                             lng: 119.37784, 
-                            images: "images/seven-commandos.jpg", // Single image as a string
+                            images: "images/tourA/7commando.png", // Single image as a string
                             description: "A beautiful white sand beach with crystal clear waters."
                         },
-                        { 
-                            name: "Small Lagoon", 
-                            lat: 11.156441679761166,
-                            lng: 119.32145468084, 
-                            images: ["images/small-lagoon.webp"], // Single image as an array
-                            description: "A serene lagoon perfect for kayaking."
-                        },
+
                         { 
                             name: "Big Lagoon", 
                             lat: 11.15443, 
                             lng: 119.32095, 
-                            images: ["images/big-lagoon.webp", "images/secret-lagoon.jpg"], // Multiple images
+                            images: ["images/tourA/BigLagoon.png"], // Multiple images
                             description: "A grand lagoon surrounded by towering cliffs."
                         },
+
+                        { 
+                            name: "Payong-Payong Beach", 
+                            lat: 11.14536,
+                            lng: 119.32082, 
+                            images: ["images/tourA/payongPayongBeach.png"],  
+                            description: "A quiet beach on Miniloc Island with white sand, clear waters, and scenic limestone cliffs."
+                         },
+
                         { 
                             name: "Secret Lagoon", 
-                            lat: 11.14622, 
-                            lng: 119.31328, 
-                            images: "images/secret-lagoon.jpg", // Single image as a string
+                            lat: 11.145601607239213, 
+                            lng: 119.31272008916551, 
+                            images: "images/tourA/secretLagoon1.png", // Single image as a string
                             description: "A hidden gem accessed through a small entrance."
                         },
                         { 
                             name: "Shimizu Island", 
                             lat: 11.138566, 
                             lng: 119.318315, 
-                            images: "images/shimizu-island.jpg", // Single image as a string
+                            images: "images/tourA/shimizu_island.png", // Single image as a string
                             description: "A vibrant snorkeling spot with rich marine life."
                         }
                     ]
@@ -242,126 +245,139 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                 tourB: {
                     title: "El Nido Palawan Tour B",
                     description: "Discover hidden caves and pristine beaches on this exciting island-hopping adventure.",
-                    image: "images/pinagbuyutan-island.webp",
+                    image: "images/tourB/CathedralCave.png",
                     subTours: [
-                        { 
-                            name: "Entalula Island", 
-                            lat: 11.12877, 
-                            lng: 119.33565, 
-                            images: "images/entalula-island.jpg", // Single image as a string
-                            description: "A scenic view of the island."
-                        },
-                        { 
-                            name: "Pinagbuyutan Island", 
-                            lat: 11.12252, 
-                            lng: 119.39172, 
-                            images: "images/pinagbuyutan-island.webp", // Single image as a string
-                            description: "Known for its crystal clear waters and sandy beaches."
-                        },
                         { 
                             name: "Cathedral Cave", 
                             lat: 11.07664, 
                             lng: 119.38458, 
-                            images: "images/cathedral-cave.jpg", // Single image as a string
+                            images: "images/tourB/cathedralCave.png", // Single image as a string
                             description: "Famous for its grand cave formations."
                         },
-                        { 
-                            name: "Snake Island", 
-                            lat: 11.09395, 
-                            lng: 119.33859, 
-                            images: "images/snake-island.jpg", // Single image as a string
-                            description: "A beautiful snake-shaped island."
-                        },
+
                         { 
                             name: "Cudugnon Cave", 
                             lat: 11.08486, 
                             lng: 119.35261, 
-                            images: "images/cudugnon-cave.jpg", // Single image as a string
+                            images: "images/tourB/cudugnonCave.png", // Single image as a string
                             description: "A quiet beach perfect for relaxation."
+                        },
+
+                        { 
+                            name: "Entalula Island", 
+                            lat: 11.12877, 
+                            lng: 119.33565, 
+                            images: "images/tourB/EntalulaIsland.png", // Single image as a string
+                            description: "A scenic view of the island."
+                        },
+
+                       { 
+                           name: "Lagen sandbar", 
+                            lat: 11.07697, 
+                           lng: 119.41320, 
+                            images: "images/tourB/LagenSandbar.png", // Single image as a string
+                           description: "A stunning sandbar near Lagen Island, perfect for photos and a quick swim during low tide."
+                        },
+            
+
+                        { 
+                            name: "Snake Island", 
+                            lat: 11.09395, 
+                            lng: 119.33859, 
+                            images: "images/tourB/SnakeIsland.png", // Single image as a string
+                            description: "A beautiful snake-shaped island."
                         }
                     ]
                 },
                 tourC: {
                     title: "El Nido Palawan Tour C",
                     description: "Explore hidden beaches and stunning rock formations on this unforgettable journey.",
-                    image: "images/hidden-beach.webp",
+                    image: "images/tourC/HelicopterIsland.png",
                     subTours: [
                         { 
+                            name: "Helicopter Island", 
+                            lat: 11.197608545032494, 
+                            lng:   119.33920203839347, 
+                            images: "images/tourC/HelicopterIsland.png", // Single image as a string
+                            description: "An island known for its helicopter-shaped rock formations."
+                        },
+
+                        { 
                             name: "Hidden Beach", 
-                            lat: 11.190456288168928, 
-                            lng:  119.2835603912837, 
-                            images: "images/hidden-beach.webp", // Single image as a string
+                            lat: 11.189894517010632, 
+                            lng:  119.28248769318553, 
+                            images: "images/tourC/HiddenBeach1.png", // Single image as a string
                             description: "A peaceful and secluded beach with crystal-clear water."
                         },
                         { 
                             name: "Secret Beach", 
                             lat: 11.1942031118851, 
                             lng: 119.27695142798181,
-                            images: "images/secret-beach.jpg", // Single image as a string
+                            images: "images/tourC/HiddenBeach1.png", // Single image as a string
                             description: "A secret cove with a sandy beach surrounded by cliffs."
                         },
+
                         { 
-                            name: "Matinloc Shrine", 
-                            lat: 11.202769341297039, 
-                            lng:  119.27526709846771, 
-                            images: "images/matinloc-shrine.jpg", // Single image as a string
-                            description: "A historic shrine offering panoramic views of the island."
-                        },
+                                name: "Star Beach", 
+                                lat: 11.20311, 
+                                lng:  119.27002, 
+                                images: "images/tourC/starBeach.png", // Single image as a string
+                                description: "A popular snorkeling spot with vibrant coral reefs and clear turquoise waters"
+                         },
+                     
                         { 
                             name: "Talisay Beach", 
-                            lat: 11.195592371278137,
-                            lng:  119.27150117902507, 
-                            images: "images/talisay-beach.webp", // Single image as a string
+                            lat: 11.194934034263463,
+                            lng:  119.27143996231436, 
+                            images: "images/tourC/HiddenBeach1.png", // Single image as a string
                             description: "A tranquil beach perfect for swimming and relaxing."
-                        },
-                        { 
-                            name: "Helicopter Island", 
-                            lat: 11.201241624115156, 
-                            lng:  119.33809779425236, 
-                            images: "images/helicopter-island.jpg", // Single image as a string
-                            description: "An island known for its helicopter-shaped rock formations."
                         }
                     ]
                 },
                 tourD: {
                     title: "El Nido Palawan Tour D",
                     description: "Experience the tranquil beauty of secluded beaches and pristine lagoons.",
-                    image: "images/cadlao-lagoon.jpg",
+                    image: "images/tourD/Bukal_island.png",
                     subTours: [
+
+                        { 
+                            name: "Bukal Island", 
+                            lat: 11.12206257172957,
+                            lng:  119.3916666473056, 
+                            images: "images/tourD/Bukal_island.png",// Single image as a string
+                            description: "A tropical paradise with stunning beaches and picturesque landscapes."
+                        },
+
                         { 
                             name: "Cadlao Lagoon", 
                             lat: 11.214678000762788,
                             lng:  119.34544827019708, 
-                            images: "images/cadlao-lagoon.jpg", // Single image as a string
+                            images: "images/tourD/CadlaoLagoon.png", // Single image as a string
                             description: "A serene lagoon surrounded by towering limestone cliffs."
                         },
+
                         { 
-                            name: "Pasandigan Beach", 
-                            lat: 11.208240073503626,
-                            lng: 119.35747373283168,
-                            images: "images/pasandigan-beach.jpg", // Single image as a string
-                            description: "A peaceful beach with clear water, perfect for a swim."
-                        },
-                        { 
-                            name: "Natnat Beach", 
-                            lat: 11.20571163640752,
-                            lng:  119.36389914271139, 
-                            images: "images/natnat-beach.jpg", // Single image as a string
-                            description: "A secluded beach with golden sand and crystal-clear water."
-                        },
-                        { 
-                            name: "Pinagbuyutan Island", 
-                            lat: 11.12206257172957,
-                            lng:  119.3916666473056, 
-                            images: "images/pinagbuyutan-island.jpg", // Single image as a string
-                            description: "A tropical paradise with stunning beaches and picturesque landscapes."
-                        },
-                        { 
-                            name: "Dolarog Beach", 
+                            name: "Paradise Beach", 
                             lat: 11.134455682164148, 
                             lng:  119.39865960149385, 
-                            images: "images/dolarog-beach.jpg", // Single image as a string
+                            images: "images/tourD/ParadiseBeach.png", // Single image as a string
                             description: "A quiet beach offering beautiful views of the surrounding islands."
+                        },
+
+                        { 
+                            name: "Small Lagoon", 
+                            lat: 11.156441679761166,
+                            lng: 119.32145468084, 
+                            images: ["images/tourD/Small_lagoon.png"],  
+                            description: "A serene lagoon perfect for kayaking."
+                         },
+                         
+                        { 
+                            name: "Sunset Beach", 
+                            lat: 10.51825,
+                            lng:  119.26552, 
+                            images: "images/tourD/sunsetBeach.png", // Single image as a string
+                           description: "A peaceful spot known for its golden sands and breathtaking sunset views."
                         }
                     ]
                 }
@@ -372,3 +388,281 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
         AOS.init({
             once: false, // Animation will repeat when re-entering viewport
         });
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // ---  Elements Selection --- 
+            const reviewContainer = document.getElementById('reviewContainer');
+            const prevReview = document.getElementById('prevReview');
+            const nextReview = document.getElementById('nextReview');
+            const imageReviewContainer = document.getElementById('imageReviewContainer');
+            const prevImage = document.getElementById('prevImage');
+            const nextImage = document.getElementById('nextImage');
+            const backgroundVideo = document.getElementById('backgroundVideo');
+            const reviewVideos = document.querySelectorAll('.review-video');
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModal = document.getElementById('closeModal');
+        
+            if (!reviewContainer || !prevReview || !nextReview || !imageReviewContainer || !prevImage || !nextImage || !videoModal || !modalVideo || !closeModal) {
+                console.error("One or more required elements not found in the DOM.");
+                return;
+            }
+        
+            // ---  Pause all other videos when a new one starts --- 
+            function pauseAllVideos() {
+                reviewVideos.forEach(video => {
+                    if (video && !video.paused) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                });
+            }
+        
+            // ---  Hover Effect: Change Background Video & Play on Hover (with safety check) --- 
+            let hoverTimeout;
+            reviewVideos.forEach((video) => {
+                video.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = setTimeout(() => {
+                        pauseAllVideos(); // ---  Stop all videos before playing a new one --- 
+                        
+                        const videoSrc = video.querySelector('source')?.getAttribute('src');
+                        if (backgroundVideo && videoSrc && backgroundVideo.src !== videoSrc) {
+                            backgroundVideo.src = videoSrc;
+                            backgroundVideo.load();
+                            backgroundVideo.play().catch(() => {});
+                        }
+                        if (video) {
+                            video.play().catch(() => {});
+                        }
+                    }, 200);
+                });
+        
+                video.addEventListener('mouseleave', () => {
+                    clearTimeout(hoverTimeout);
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                    if (backgroundVideo) {
+                        backgroundVideo.pause();
+                        backgroundVideo.currentTime = 0;
+                    }
+                });
+            });
+        
+            // ---  Modal Video Click (Prevents multiple videos playing in modal) --- 
+            reviewVideos.forEach((video) => {
+                video.addEventListener('click', (e) => {
+                    const videoElement = e.target.closest('.review-video');
+                    const videoSrc = videoElement?.querySelector('source')?.getAttribute('src');
+        
+                    if (videoSrc) {
+                        pauseAllVideos(); // ---  Stop all videos before opening modal --- 
+                        modalVideo.src = videoSrc;
+                        modalVideo.load();
+                        modalVideo.muted = true;
+                        modalVideo.play().then(() => {
+                            modalVideo.muted = false;
+                        }).catch(() => {
+                            modalVideo.controls = true;
+                        });
+        
+                        videoModal.classList.remove('hidden');
+                        videoModal.style.display = "flex";
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+        
+            // --- Close Modal (Ensure video resets properly) --- 
+            function closeVideoModal() {
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.removeAttribute('src');
+                    modalVideo.controls = false;
+                }
+                videoModal.classList.add('hidden');
+                videoModal.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        
+            closeModal.addEventListener('click', closeVideoModal);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeVideoModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape") closeVideoModal();
+            });
+        
+            // --- Carousel Scroll for Reviews --- 
+            const scrollAmount = 230;
+            nextReview.addEventListener('click', () => {
+                reviewContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+            prevReview.addEventListener('click', () => {
+                reviewContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        
+            // --- Carousel Scroll for Images --- 
+            nextImage.addEventListener('click', () => {
+                imageReviewContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+            prevImage.addEventListener('click', () => {
+                imageReviewContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        
+            // --- Enable Autoplay After User Interaction --- 
+            document.body.addEventListener('click', function enableAutoplay() {
+                if (modalVideo) {
+                    modalVideo.play().catch(() => {});
+                }
+                document.body.removeEventListener('click', enableAutoplay);
+            }, { once: true });
+        
+            // ---  Image Carousel Functionality --- 
+            const images = imageReviewContainer.querySelectorAll('div');
+            let currentIndex = 0;
+        
+            nextImage.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+        
+            prevImage.addEventListener('click', () => {
+                images[currentIndex].classList.add('hidden');
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                images[currentIndex].classList.remove('hidden');
+            });
+        });
+
+          // ---  Smooth scrolling for "Explore Trip" buttons --- 
+    const exploreButtons = document.querySelectorAll('.explore-trip-button');
+    exploreButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+
+function resizeMap() {
+    let mapContainer = document.getElementById("map");
+    if (window.innerWidth < 640) {
+        mapContainer.style.height = "300px"; // ---  Adjust height for mobile --- 
+    } else {
+        mapContainer.style.height = "550px"; // ---  Default height for desktop --- 
+    }
+}
+window.addEventListener("resize", resizeMap);
+resizeMap(); // ---  Call once to set initial size --- 
+
+
+
+/* ---  for buttons image and videos transition (Desktop and Mobile) ---  */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const videoContainer = document.getElementById("videoContainer");
+    const imageContainer = document.getElementById("imageContainer");
+    const showVideos = document.getElementById("showVideos");
+    const showImages = document.getElementById("showImages");
+
+    showVideos.addEventListener("click", function () {
+        videoContainer.classList.remove("hidden");
+        videoContainer.classList.add("active");
+        imageContainer.classList.remove("active");
+        imageContainer.classList.add("hidden");
+    });
+
+    showImages.addEventListener("click", function () {
+        imageContainer.classList.remove("hidden");
+        imageContainer.classList.add("active");
+        videoContainer.classList.remove("active");
+        videoContainer.classList.add("hidden");
+    });
+});
+
+/* ---  image buttons prev and next (Desktop) ---  */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const imageReviewContainer = document.getElementById('imageReviewContainer');
+    const images = imageReviewContainer.querySelectorAll('div');
+    let currentIndex = 0;
+
+    function updateImageVisibility() {
+        images.forEach((img, index) => {
+            img.classList.toggle('hidden', index !== currentIndex);
+        });
+    }
+
+    document.getElementById('nextImage').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImageVisibility();
+    });
+
+    document.getElementById('prevImage').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImageVisibility();
+    });
+
+    // --- Ensure the first image is visible when the page loads ---
+    updateImageVisibility();
+});
+
+
+/* --- Modal for close and Image --- */
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll("#imageReviewContainer img");
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeImageModal");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                modalImage.src = this.src;
+                modal.classList.remove("hidden");
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        closeModal.addEventListener("click", function () {
+            modal.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        });
+
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+                modal.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        });
+    });
+
+
+    
+/* --- Refreshes the  --- */
+
+
+    document.querySelectorAll('.explore-trip-button').forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(() => {
+                AOS.refreshHard();
+            }, 500);
+        });
+    });
+
+
+    
+
