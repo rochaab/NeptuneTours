@@ -13,47 +13,81 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-
     <title>Landing Page</title>
     @vite('resources/css/app.css')
     @vite(['resources/js/app.js'])
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        section {
+            min-height: 100vh;
+        }
+    </style>
 </head>
 <body class="bg-white font-['Raleway']">
     @include('partials.header')
-    <!-- Landing Section -->
-    <section id="landing-carousel" class="relative h-screen bg-cover bg-center overflow-hidden">
-        <div class="carousel-slides">
-            <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('{{ asset('images/landing1.png') }}');"></div>
-            <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('{{ asset('images/landing2.png') }}');"></div>
-            <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('{{ asset('images/landing1.png') }}');"></div>
-        </div>
-        <div class="absolute inset-0 bg-black opacity-50"></div>
-        <div class="absolute inset-0 flex items-center justify-center text-white p-4">
-            <div class="max-w-full md:max-w-[900px] text-center md:text-left md:ml-[-30%]">
-                <p class="text-s font-bold leading-tight mb-2 font-Anek tracking-[0.1em]">EXPERIENCE</p>
-                <h1 id="typing-animation" class="text-4xl md:text-7xl font-bold font-Eczar leading-tight mb-6"></h1>
-                <script>
-                    const text = "Neptune Tours and Travels: Your Paradise Gateway to El Nido";
-                    let index = 0;
-                    const typingElement = document.getElementById('typing-animation');
+    
+    <section id="landing" class="relative h-screen bg-cover bg-center overflow-hidden">
+    <div class="carousel-slides">
+        <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000" style="background-image: url('{{ asset('images/landing1.png') }}');"></div>
+        <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('{{ asset('images/landing2.png') }}');"></div>
+        <div class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('{{ asset('images/landing1.png') }}');"></div>
+    </div>
 
-                    function type() {
-                        if (index < text.length) {
-                            typingElement.textContent += text.charAt(index);
-                            index++;
-                            setTimeout(type, 30); // Adjust typing speed here
-                        }
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <div class="absolute inset-0 flex justify-center items-center px-2 md:px-2 text-white">
+    <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full max-w-screen-2xl gap-12 md:gap-[12rem]">
+        <!-- Left Content -->
+        <div class="w-full md:w-3/5 text-center md:text-left">
+            <p class="text-s font-bold leading-tight mb-2 font-Anek tracking-[0.1em]">EXPERIENCE</p>
+            <h1 id="typing-animation" class="text-4xl md:text-7xl font-bold font-Eczar leading-tight mb-6"></h1>
+            <script>
+                const text = "Neptune Tours and Travels: Your Paradise Gateway to El Nido";
+                let index = 0;
+                const typingElement = document.getElementById('typing-animation');
+
+                function type() {
+                    if (index < text.length) {
+                        typingElement.textContent += text.charAt(index);
+                        index++;
+                        setTimeout(type, 30);
                     }
+                }
+                type();
+            </script>
+            <a href="#tours" class="inline-block bg-white text-[#080c24] px-6 py-2 rounded-lg text-lg md:text-xl font-semibold font-Anek hover:bg-blue-100 transition duration-300">Explore Tours</a>
+        </div>
 
-                    type();
-                </script>
-                <a href="#explore" class="inline-block bg-white text-[#080c24] px-6 py-2 rounded-lg text-lg md:text-xl font-semibold font-Anek hover:bg-blue-100 transition duration-300">Explore Tours</a>
+        <!-- QR Code Container -->
+        <div class="hidden md:flex flex-col bg-white/20 backdrop-blur-sm text-white rounded-xl p-6 shadow-lg w-[22rem]">
+            <h2 class="text-xl font-Eczar font-bold mb-2 text-center">Guest Registration & Feedback</h2>
+            <p class="text-sm text-center mb-6">Scan the QR codes below to fill out our guest form and provide feedback for your experience.</p>
+            <div class="flex justify-between gap-4">
+                <!-- Guest Form -->
+                <div class="text-center">
+                    <div class="bg-white p-2 rounded-lg mb-2 border">
+                        <img src="{{ asset('images/qrguestform.png') }}" alt="Guest Fill Up Form QR Code" class="w-28 h-28">
+                    </div>
+                    <p class="font-Eczar font-semibold text-xs">Guest Form</p>
+                </div>
+                <!-- Feedback Form -->
+                <div class="text-center">
+                    <div class="bg-white p-2 rounded-lg mb-2 border">
+                        <img src="{{ asset('images/qrfeedback.png') }}" alt="Guest Feedback QR Code" class="w-28 h-28">
+                    </div>
+                    <p class="font-Eczar font-semibold text-xs">Guest Feedback</p>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Tours Section -->
-    <div id="explore" class="w-full min-h-screen flex flex-col justify-center bg-[#faf7f2] font-Inter">
+</section>
+
+
+    <section id="tours" class="w-full min-h-screen flex flex-col justify-center bg-[#faf7f2] font-Inter">
         <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div class="flex items-start">
                 <div data-aos="fade-left" data-aos-duration="1000">
@@ -64,11 +98,8 @@
                 </div>
             </div>
 
-            <!-- Tours Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- Tour A -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourA" 
-                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourA" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/tourA/7commando.png') }}" alt="Tour A" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
@@ -81,9 +112,7 @@
                     </div>
                 </div>
 
-                <!-- Tour B -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourB" 
-                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourB" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/tourB/cathedralCave.png') }}" alt="Tour B" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
@@ -96,9 +125,7 @@
                     </div>
                 </div>
 
-                <!-- Tour C -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourC" 
-                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourC" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/tourC/HelicopterIsland.png') }}" alt="Tour C" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
@@ -111,9 +138,7 @@
                     </div>
                 </div>
 
-                <!-- Tour D -->
-                <div class="tour-item group relative cursor-pointer" data-tour="tourD" 
-                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <div class="tour-item group relative cursor-pointer" data-tour="tourD" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                     <div class="h-[300px] overflow-hidden">
                         <img src="{{ asset('images/tourD/Bukal_island.png') }}" alt="Tour D" class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-110">
                     </div>
@@ -127,31 +152,17 @@
                 </div>
             </div>
 
-
-            <!-- Tour Details and Map Section (Hidden Initially) -->
             <div id="tour-details" class="hidden flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-350px)]">
-                <!-- Back Button -->
-                <button id="back-button" class="">
-                </button>
-
-                <!-- Tour Details -->
+                <button id="back-button" class=""></button>
                 <div class="lg:w-1/3 min-h-[550px]">
-                    <div id="tour-details-content" class="relative overflow-visible h-full touch-pan-x">
-                        <!-- Tour details will be dynamically inserted here -->
-                    </div>
+                    <div id="tour-details-content" class="relative overflow-visible h-full touch-pan-x"></div>
                 </div>
-
-                <!-- Map Viewer -->
                <div class="map-container relative w-full lg:w-2/3 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:h-[550px] flex justify-center">
                     <div id="map" class="w-full h-full rounded-lg border border-gray-300 shadow-md"></div>
-
-                    <!-- Floating Info Box -->
                     <div id="map-info" class="hidden">
                         <div class="relative">
                              <button id="prev-btn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"></button>
-                            <div id="map-info-image-container" class="overflow-hidden max-h-[350px]">
-                                <!-- Images will be inserted here dynamically -->
-                            </div>
+                            <div id="map-info-image-container" class="overflow-hidden max-h-[350px]"></div>
                             <button id="next-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"></button>
                         </div>
                         <h4 id="map-info-title" class="text-lg font-semibold text-blue-800 font-Eczar"></h4>
@@ -160,229 +171,194 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!--‹› -->
-
-<section id="experience" class="w-full py-16 text-white font-['Raleway'] relative overflow-hidden">
-    <!-- Background Video -->
-    <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
-        <source src="{{ asset('videos/revback.MP4') }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Text Container -->
-<div class="relative z-10 text-center px-4 md:px-12 text-container">
-    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-Eczar mb-8 md:mb-10" data-aos="fade-down">
-        What Our Travelers Experience in Palawan
-    </h2>
-
-    <!-- Buttons Below the Text -->
-    <div class="flex flex-row justify-center items-center gap-6">
-        <button id="showVideos" class="px-8 py-4 text-lg font-semibold tracking-wide text-white backdrop-blur-md bg-white/10 border border-white/30 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 hover:bg-white/20 hover:border-white/50 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 md:px-12 md:py-6 md:text-xl">
-            Show Videos
-        </button>
-
-        <button id="showImages" class="px-8 py-4 text-lg font-semibold tracking-wide text-white backdrop-blur-md bg-white/10 border border-white/30 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 hover:bg-white/20 hover:border-white/50 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 md:px-12 md:py-6 md:text-xl">
-            Show Comments
-        </button>
-    </div>
-</div>
-
-    <!-- Video Container -->
-    <div id="videoContainer" class="relative flex flex-col items-center w-full mt-6 md:mt-12">
-        <div class="relative flex items-center w-full">
-            <!-- Prev Button -->
-            <button class="absolute left-2 sm:left-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="prevReview">
-                &#9664;
-            </button>
-            
-            <!-- Review Container -->
-            <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
-                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
-                    <div class="absolute top-0 left-0 w-full h-full">
-                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
-                            <source src="{{ asset('videos/rev3.MP4') }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-
-                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
-                    <div class="absolute top-0 left-0 w-full h-full">
-                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
-                            <source src="{{ asset('videos/rev4.MP4') }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-
-                <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
-                    <div class="absolute top-0 left-0 w-full h-full">
-                        <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
-                            <source src="{{ asset('videos/rev5.MP4') }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>   
-            </div>
-            
-            <!-- Next Button -->
-            <button class="absolute right-2 sm:right-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="nextReview">
-                &#9654;
-            </button>
-        </div>
-    </div>
-
-<!-- Image Container -->
-<div id="imageContainer" class="relative flex flex-col items-center w-full mt-6 md:mt-12 hidden">
-    <div class="relative flex flex-col items-center w-full">
-        
-<!-- New Container -->
-<div class="new-container-class bg-black/50 backdrop-blur-md p-6 rounded-lg shadow-lg" style="width: 80%; max-width: 1000px; height: auto;">
-    <!-- Image Review Container -->
-            <div class="relative w-full px-4 sm:px-8 overflow-hidden flex justify-center" id="imageReviewContainer">
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto">
-                <img src="{{ asset('images/rev1.png') }}" alt="Review Image 1" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev2.png') }}" alt="Review Image 2" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev3.png') }}" alt="Review Image 3" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev4.png') }}" alt="Review Image 4" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev5.png') }}" alt="Review Image 5" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev6.png') }}" alt="Review Image 6" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev7.png') }}" alt="Review Image 7" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev8.png') }}" alt="Review Image 8" class="w-full h-auto object-cover transition-opacity duration-300">
-            </div>
-            <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
-                <img src="{{ asset('images/rev9.png') }}" alt="Review Image 9" class="w-full h-auto object-cover transition-opacity duration-300">
-           </div>
-      </div>
-</div>
-
-        <!-- Prev & Next Buttons (Inside Image Area) -->
-        <div class="absolute top-1/2 left-0 right-0 flex justify-between px-2 sm:px-4 z-10 -translate-y-1/2">
-            <button class="bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/50 transition-all duration-200 transform hover:scale-110" id="prevImage">
-                &#9664;
-            </button>
-            <button class="bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/50 transition-all duration-200 transform hover:scale-110" id="nextImage">
-                &#9654;
-            </button>
-        </div>
-    </div>
-</div>
-</section>
-
-
-<!-- Image Modal -->
-<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-50">
-    <div class="relative w-full max-w-6xl">
-        <button id="closeImageModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
-            &times;
-        </button>
-        <img id="modalImage" class="w-full h-auto max-h-screen object-contain rounded-lg shadow-lg" src="" alt="Full Image">
-    </div>
-</div>
-
-
-
-<!-- Video Modal -->
-<div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
-    <div class="relative w-full max-w-4xl transform transition-all scale-95 hover:scale-100 duration-300">
-        <button id="closeModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
-            &times;
-        </button>
-        <video id="modalVideo" class="w-full aspect-[16/9] object-cover rounded-lg shadow-lg" controls autoplay>
+    <section id="experience" class="w-full py-16 text-white font-['Raleway'] relative overflow-hidden">
+        <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted>
+            <source src="{{ asset('videos/revback.MP4') }}" type="video/mp4">
         </video>
-    </div>
-</div> 
 
+        <div class="relative z-10 text-center px-4 md:px-12 text-container">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-Eczar mb-8 md:mb-10" data-aos="fade-down">
+                What Our Travelers Experience in Palawan
+            </h2>
 
+            <div class="flex flex-row justify-center items-center gap-6">
+                <button id="showVideos" class="px-8 py-4 text-lg font-semibold tracking-wide text-white backdrop-blur-md bg-white/10 border border-white/30 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 hover:bg-white/20 hover:border-white/50 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 md:px-12 md:py-6 md:text-xl">
+                    Show Videos
+                </button>
 
-
-    <div id="contact" class="w-full min-h-screen flex flex-col items-center justify-center text-center p-10 bg-[#10194a] relative font-Anek">
-    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 pt-[30px] font-Eczar" data-aos="fade-down">
-        Choose Your Perfect Adventure!
-    </h1>
-    <p class="text-white mb-6 max-w-2xl" data-aos="fade-down" data-aos-delay="200">
-        Explore El Nido with our four amazing tours! From island hopping to hidden lagoons, pristine beaches, and stunning sunset cruises—your perfect adventure awaits. Get in touch today!
-    </p>
-
-    @if (session('success'))
-        <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl p-2">
-        @csrf
-        <!-- Full Name -->
-        <div class="text-left" data-aos="fade-left">
-            <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Full Name*" required>
-            <p id="nameError" class="text-red-500 text-sm hidden mt-2"></p>
-        </div>
-        
-        <!-- Phone & Email -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-            <div data-aos="fade-right">
-                <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Phone Number*" required>
-                <p id="phoneError" class="text-red-500 text-sm hidden mt-2"></p>
-            </div>
-            <div data-aos="fade-left">
-                <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Email Address*" required>
-                <p id="emailError" class="text-red-500 text-sm hidden mt-2"></p>
+                <button id="showImages" class="px-8 py-4 text-lg font-semibold tracking-wide text-white backdrop-blur-md bg-white/10 border border-white/30 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 hover:bg-white/20 hover:border-white/50 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-white/30 md:px-12 md:py-6 md:text-xl">
+                    Show Comments
+                </button>
             </div>
         </div>
 
-        <!-- Message -->
-        <div class="text-left" data-aos="fade-left">
-            <textarea id="message" name="message" rows="4" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Enter your message..." required></textarea>
-            <p id="messageError" class="text-red-500 text-sm hidden mt-2"></p>
+        <div id="videoContainer" class="relative flex flex-col items-center w-full mt-6 md:mt-12">
+            <div class="relative flex items-center w-full">
+                <button class="absolute left-2 sm:left-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="prevReview">
+                    &#9664;
+                </button>
+                
+                <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
+                    <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                        <div class="absolute top-0 left-0 w-full h-full">
+                            <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                                <source src="{{ asset('videos/rev3.MP4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                        <div class="absolute top-0 left-0 w-full h-full">
+                            <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                                <source src="{{ asset('videos/rev4.MP4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
+                        <div class="absolute top-0 left-0 w-full h-full">
+                            <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
+                                <source src="{{ asset('videos/rev5.MP4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>   
+                </div>
+                
+                <button class="absolute right-2 sm:right-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="nextReview">
+                    &#9654;
+                </button>
+            </div>
         </div>
 
-        <!-- Submit Button -->
-        <div class="flex justify-end">
-            <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105" data-aos="zoom-in">
-                Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+        <div id="imageContainer" class="relative flex flex-col items-center w-full mt-6 md:mt-12 hidden">
+            <div class="relative flex flex-col items-center w-full">
+                <div class="new-container-class bg-black/50 backdrop-blur-md p-6 rounded-lg shadow-lg" style="width: 80%; max-width: 1000px; height: auto;">
+                    <div class="relative w-full px-4 sm:px-8 overflow-hidden flex justify-center" id="imageReviewContainer">
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto">
+                            <img src="{{ asset('images/rev1.png') }}" alt="Review Image 1" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev2.png') }}" alt="Review Image 2" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev3.png') }}" alt="Review Image 3" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev4.png') }}" alt="Review Image 4" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev5.png') }}" alt="Review Image 5" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev6.png') }}" alt="Review Image 6" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev7.png') }}" alt="Review Image 7" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev8.png') }}" alt="Review Image 8" class="w-full h-auto object-cover transition-opacity duration-300">
+                        </div>
+                        <div class="relative rounded-lg shadow-xl overflow-hidden w-full max-w-[800px] h-auto hidden">
+                            <img src="{{ asset('images/rev9.png') }}" alt="Review Image 9" class="w-full h-auto object-cover transition-opacity duration-300">
+                       </div>
+                  </div>
+                </div>
+
+                <div class="absolute top-1/2 left-0 right-0 flex justify-between px-2 sm:px-4 z-10 -translate-y-1/2">
+                    <button class="bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/50 transition-all duration-200 transform hover:scale-110" id="prevImage">
+                        &#9664;
+                    </button>
+                    <button class="bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/50 transition-all duration-200 transform hover:scale-110" id="nextImage">
+                        &#9654;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-6xl">
+            <button id="closeImageModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
+                &times;
             </button>
+            <img id="modalImage" class="w-full h-auto max-h-screen object-contain rounded-lg shadow-lg" src="" alt="Full Image">
         </div>
-    </form>
-</div>
+    </div>
 
-<!-- Footer Section -->
-<div id="footer" class="w-full bg-[#080c24] text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-x-16 text-left">
-        <!-- Branding -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+        <div class="relative w-full max-w-4xl transform transition-all scale-95 hover:scale-100 duration-300">
+            <button id="closeModal" class="absolute top-4 right-4 bg-black/70 text-white font-bold text-3xl focus:outline-none transform transition-all hover:scale-110 hover:text-red-500 p-4 rounded-full z-10">
+                &times;
+            </button>
+            <video id="modalVideo" class="w-full aspect-[16/9] object-cover rounded-lg shadow-lg" controls autoplay>
+            </video>
+        </div>
+    </div> 
+
+    <section id="contact" class="w-full min-h-screen flex flex-col items-center justify-center text-center p-10 bg-[#10194a] relative font-Anek">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 pt-[30px] font-Eczar" data-aos="fade-down">
+            Choose Your Perfect Adventure!
+        </h1>
+        <p class="text-white mb-6 max-w-2xl" data-aos="fade-left" data-aos-delay="200">
+            Explore El Nido with our four amazing tours! From island hopping to hidden lagoons, pristine beaches, and stunning sunset cruises—your perfect adventure awaits. Get in touch today!
+        </p>
+
+        @if (session('success'))
+            <div class="bg-green-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="bg-red-500 text-white p-4 rounded mb-6 w-full max-w-6xl" data-aos="fade-up">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <form id="contactForm" action="{{ route('contact.send') }}" method="POST" class="space-y-8 w-full max-w-6xl p-2">
+            @csrf
+            <div class="text-left" data-aos="fade-left">
+                <input type="text" id="name" name="name" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Full Name*" required>
+                <p id="nameError" class="text-red-500 text-sm hidden mt-2"></p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                <div data-aos="fade-right">
+                    <input type="tel" id="phone" name="phone" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Phone Number*" required>
+                    <p id="phoneError" class="text-red-500 text-sm hidden mt-2"></p>
+                </div>
+                <div data-aos="fade-left">
+                    <input type="email" id="email" name="email" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Email Address*" required>
+                    <p id="emailError" class="text-red-500 text-sm hidden mt-2"></p>
+                </div>
+            </div>
+
+            <div class="text-left" data-aos="fade-left">
+                <textarea id="message" name="message" rows="4" class="w-full p-4 border-none rounded-md bg-white text-black placeholder-black shadow-md" placeholder="Enter your message..." required></textarea>
+                <p id="messageError" class="text-red-500 text-sm hidden mt-2"></p>
+            </div>
+
+            <div class="flex justify-end" data-aos="fade-up">
+                <button type="submit" class="w-[200px] h-[50px] bg-white text-[#10194a] px-6 py-3 rounded-md font-medium hover:bg-gray-200 transition duration-300 shadow-lg transform hover:scale-105" data-aos="zoom-in">
+                    Send Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ➜ 
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <footer id="footer" class="w-full bg-[#080c24] text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden snap-start">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-x-16 text-left h-full">
         <div data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold font-Eczar">Neptune Tours and Travels</h2>
         </div>
 
-        <!-- Call Us -->
         <div data-aos="fade-up" data-aos-delay="100">
             <h3 class="text-lg font-bold font-Eczar">CALL US</h3>
             <p>+63 917 158 3266</p>
         </div>
 
-        <!-- Email Us -->
         <div data-aos="fade-up" data-aos-delay="200">
             <h3 class="text-lg font-bold font-Eczar">EMAIL US</h3>
             <p>
@@ -392,24 +368,41 @@
             </p>
         </div>
 
-        <!-- Social Media -->
         <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="300">
             <h3 class="text-lg font-bold font-Eczar">SOCIAL MEDIAS</h3>
-            <div class="flex space-x-4 mt-2">
-                <a href="https://www.facebook.com/NeptuneToursandTravelElNidoPalawan" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-6 h-6">
-                </a>
-                <a href="https://www.instagram.com/neptunetoursandtravelofficial/" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6">
-                </a>
-                <a href="https://www.tiktok.com/@neptunetoursandtravel" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
-                    <img src="https://www.citypng.com/public/uploads/preview/tik-tok-logo-icon-701751694793267gxetcvvp3v.png" alt="TikTok" class="w-6 h-6">
-                </a>
+            <div class="flex items-center space-x-4 mt-2">
+                <!-- Social Media Icons -->
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/NeptuneToursandTravelElNidoPalawan" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-6 h-6">
+                    </a>
+                    <a href="https://www.instagram.com/neptunetoursandtravelofficial/" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6">
+                    </a>
+                    <a href="https://www.tiktok.com/@neptunetoursandtravel" class="w-10 h-10 flex items-center justify-center transition transform hover:scale-125">
+                        <img src="https://www.citypng.com/public/uploads/preview/tik-tok-logo-icon-701751694793267gxetcvvp3v.png" alt="TikTok" class="w-6 h-6">
+                    </a>
+                </div>
+                
+                <!-- QR Codes -->
+                <div class="flex space-x-2 ml-4">
+                    <div class="text-center ml-4">
+                        <div class="bg-white p-1 rounded mb-1">
+                            <img src="{{ asset('images/qrfb.png') }}" alt="Facebook QR Code" class="w-16 h-16">
+                        </div>
+                        <p class="text-xs font-semibold text-white">Facebook</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white p-1 rounded mb-1">
+                            <img src="{{ asset('images/qrig.png') }}" alt="Instagram QR Code" class="w-16 h-16">
+                        </div>
+                        <p class="text-xs font-semibold text-white">Instagram</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -420,7 +413,164 @@
     window.App = {
         baseUrl: "{{ url('/') }}"
     };
-</script>
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false
+        });
 
+        // Snap scrolling functionality
+        const scrollableElements = Array.from(document.querySelectorAll('section, footer'));
+        let isScrolling = false;
+        let lastScrollPosition = window.scrollY;
+        const scrollDelay = 800; // Delay between scrolls in ms
+        
+        // Function to find the closest section
+        function getTargetSection(currentScroll, direction) {
+            // Get current active element (the one most visible in viewport)
+            let activeElement = null;
+            let maxVisible = 0;
+            
+            scrollableElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+                const visibleRatio = visibleHeight / window.innerHeight;
+                
+                if (visibleRatio > maxVisible) {
+                    maxVisible = visibleRatio;
+                    activeElement = element;
+                }
+            });
+            
+            // If we're at the footer and scrolling up, always go to contact section
+            if (activeElement && activeElement.id === 'footer' && direction === 'up') {
+                return document.getElementById('contact');
+            }
+            
+            // Normal scroll behavior for other cases
+            let targetSection = null;
+            let smallestDistance = Infinity;
+            
+            scrollableElements.forEach(element => {
+                const elementTop = element.offsetTop;
+                const elementBottom = elementTop + element.offsetHeight;
+                
+                if (direction === 'down') {
+                    // For downward scroll, find next section below current position
+                    if (elementTop > currentScroll + 10) {
+                        const distance = elementTop - currentScroll;
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            targetSection = element;
+                        }
+                    }
+                } else if (direction === 'up') {
+                    // For upward scroll, find previous section above current position
+                    if (elementBottom < currentScroll - 10) {
+                        const distance = currentScroll - elementBottom;
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            targetSection = element;
+                        }
+                    }
+                }
+            });
+            
+            return targetSection;
+        }
+        
+        // Main scroll event handler
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.scrollY;
+            const scrollDirection = currentScroll > lastScrollPosition ? 'down' : 'up';
+            lastScrollPosition = currentScroll;
+            
+            if (!isScrolling) {
+                isScrolling = true;
+                
+                const targetSection = getTargetSection(currentScroll, scrollDirection);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Reset the scrolling flag after a delay
+                setTimeout(() => {
+                    isScrolling = false;
+                }, scrollDelay);
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
+                e.preventDefault();
+                
+                const currentScroll = window.scrollY;
+                const direction = (e.key === 'ArrowDown' || e.key === 'PageDown') ? 'down' : 'up';
+                const targetSection = getTargetSection(currentScroll, direction);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+        
+        // Touch navigation for mobile devices
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 50;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            
+            if (Math.abs(diff) > minSwipeDistance) {
+                const currentScroll = window.scrollY;
+                const direction = diff > 0 ? 'down' : 'up';
+                const targetSection = getTargetSection(currentScroll, direction);
+                
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }, { passive: true });
+        
+        // Add CSS for snap scrolling
+        const style = document.createElement('style');
+        style.textContent = `
+            html {
+                scroll-snap-type: y proximity;
+                scroll-behavior: smooth;
+                overflow-y: scroll;
+            }
+            section {
+                scroll-snap-align: start;
+                min-height: 100vh;
+            }
+            footer {
+                scroll-snap-align: start;
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>
 </body>
 </html>

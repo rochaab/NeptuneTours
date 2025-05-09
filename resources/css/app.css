@@ -457,4 +457,23 @@ section {
         height: 550px;
     }
     
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    /* Snap scrolling for mobile */
+    @media (max-width: 1023px) {
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+        
+        .snap-start {
+            scroll-snap-align: start;
+        }
+    }
 }
