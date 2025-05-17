@@ -1,9 +1,9 @@
 import './bootstrap';
 
+// Contact form validation
 document.getElementById('contactForm').addEventListener('submit', function (e) {
     let isValid = true;
 
-    // Validation function
     function validateField(input, errorElement, condition, errorMessage) {
         if (condition) {
             errorElement.textContent = errorMessage;
@@ -34,164 +34,157 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     const phonePattern = /^[0-9]{11}$/;
     validateField(phoneInput, phoneError, !phonePattern.test(phoneInput.value.trim()), 'Enter a valid phone number (exactly 11 digits).');
 
-
     // Message validation (min 8 characters)
     const messageInput = document.getElementById('message');
     const messageError = document.getElementById('messageError');
     validateField(messageInput, messageError, messageInput.value.trim().length < 8, 'Message must be at least 8 characters long.');
 
-    // Prevent form submission if invalid
     if (!isValid) {
         e.preventDefault();
     }
 });
-        // Initialize the map
-        let map;
-        let markers = [];
-        function initializeMap(lat, lng) {
-            if (map) {
-                map.remove(); // Remove the existing map if it exists
-            }
-            map = L.map('map').setView([lat, lng], 10); // Set initial view
-            L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                attribution: '&copy; Google Maps'
-            }).addTo(map);
-            
-        }
-        // JavaScript to handle tour item clicks
-        document.querySelectorAll('.tour-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const tour = this.getAttribute('data-tour');
-                showTourDetails(tour);
-            });
-        });
-        // Function to show tour details and map
-        function showTourDetails(tour) {
-            document.querySelector('.grid').classList.add('hidden');
-            document.getElementById('tour-details').classList.remove('hidden');       
-            document.getElementById('back-button').classList.remove('hidden');      
-            document.getElementById('map-info').classList.add('hidden'); 
 
-            const tourDetailsContent = document.getElementById('tour-details-content');
-            const tourData = getTourData(tour); // Fetch tour data dynamically
-            const tourImage = `${window.App.baseUrl}/${tourData.image}`;
-            tourDetailsContent.innerHTML = 
-                `<div class="flex flex-col h-full overflow-hidden">
-                    <div class="h-1/2 relative overflow-hidden">
-                        <button id="close-tour-image" class="absolute top-4 left-4 border-2 border-[#fffffff] text-[#ffffff] bg-transparent rounded-full px-2 py-2 flex items-center text-sm font-semibold transition-all hover:bg-[#FFFFFF] hover:text-[#040823]">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <img src="${tourImage}" alt="${tour}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    </div>
-                    <div class="h-1/2 flex mt-6 flex-col group-hover:translate-x-8 transition-transform duration-300">
-                        <h3 class="text-3xl font-Eczar font-extrabold mt-2 mb-4">${tourData.title}</h3>
-                        <p class="text-[#040823] text-s mb-6 font-Anek">${tourData.description}</p>
-                        <div class="flex-grow text-[#040823] font-Anek">
-                            ${tourData.subTours.map(subTour => 
-                                `<p class="sub-tour cursor-pointer hover:bg-gray-800 hover:text-white px-[8px] transition text-gray-700 flex items-center justify-between"
-                                    data-lat="${subTour.lat}"
-                                    data-lng="${subTour.lng}"
-                                    data-images='${JSON.stringify(subTour.images)}'
-                                    data-description="${subTour.description}"
-                                    data-tour="${tour}">
-                                    ${subTour.name} <span class="ml-2">➔</span>
-                                </p>`
-                            ).join('')}
-                        </div>
-                    </div>
-                </div>`;
-            // Clear existing markers
-            if (markers.length > 0) {
-                markers.forEach(marker => map.removeLayer(marker)); // Remove markers from the map
-                markers = []; // Reset the markers array
-            }
-            // Initizlize the map with the first sub-tour's coordinates
-            initializeMap(tourData.subTours[0].lat, tourData.subTours[0].lng);
-            // Add markers for all sub-tours
-            tourData.subTours.forEach(subTour => {
-                const marker = L.marker([subTour.lat, subTour.lng]).addTo(map)
-                    .on('click', function() {
-                        // Zoom in on the clicked marker
-                        map.setView([subTour.lat, subTour.lng], 15);
-                        map.setZoom(5);
-        
-                        // Pan the map to the left by 100 pixels (adjust as needed)
-                        map.panBy([-100, 0]);
-        
-                        // Update the floating info box
-                        updateMapInfo(subTour);
-                    });
-                markers.push(marker);
+// --- Map logic ---
+let map;
+let markers = [];
+function initializeMap(lat, lng) {
+    if (map) {
+        map.remove();
+    }
+    map = L.map('map').setView([lat, lng], 10);
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        attribution: '&copy; Google Maps'
+    }).addTo(map);
+}
+
+// JavaScript to handle tour item clicks
+document.querySelectorAll('.tour-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const tour = this.getAttribute('data-tour');
+        showTourDetails(tour);
+    });
+});
+
+// Function to show tour details and map
+function showTourDetails(tour) {
+    document.querySelector('.grid').classList.add('hidden');
+    document.getElementById('tour-details').classList.remove('hidden');       
+    document.getElementById('back-button').classList.remove('hidden');      
+    document.getElementById('map-info').classList.add('hidden'); 
+
+    const tourDetailsContent = document.getElementById('tour-details-content');
+    const tourData = getTourData(tour); // Fetch tour data dynamically
+    const tourImage = `${window.App?.baseUrl || ''}/${tourData.image}`; // FIX: use window.App?.baseUrl with fallback
+    tourDetailsContent.innerHTML = 
+        `<div class="flex flex-col h-full overflow-hidden">
+            <div class="h-1/2 relative overflow-hidden">
+                <button id="close-tour-image" class="absolute top-4 left-4 border-2 border-[#fffffff] text-[#ffffff] bg-transparent rounded-full px-2 py-2 flex items-center text-sm font-semibold transition-all hover:bg-[#FFFFFF] hover:text-[#040823]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <img src="${tourImage}" alt="${tour}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+            </div>
+            <div class="h-1/2 flex mt-6 flex-col group-hover:translate-x-8 transition-transform duration-300">
+                <h3 class="text-3xl font-Eczar font-extrabold mt-2 mb-4">${tourData.title}</h3>
+                <p class="text-[#040823] text-s mb-6 font-Anek">${tourData.description}</p>
+                <div class="flex-grow text-[#040823] font-Anek">
+                    ${tourData.subTours.map(subTour => 
+                        `<p class="sub-tour cursor-pointer hover:bg-gray-800 hover:text-white px-[8px] transition text-gray-700 flex items-center justify-between"
+                            data-lat="${subTour.lat}"
+                            data-lng="${subTour.lng}"
+                            data-images='${JSON.stringify(subTour.images)}'
+                            data-description="${subTour.description}"
+                            data-tour="${tour}">
+                            ${subTour.name} <span class="ml-2">➔</span>
+                        </p>`
+                    ).join('')}
+                </div>
+            </div>
+        </div>`;
+    // Clear existing markers
+    if (markers.length > 0) {
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+    }
+    // Initizlize the map with the first sub-tour's coordinates
+    initializeMap(tourData.subTours[0].lat, tourData.subTours[0].lng);
+    // Add markers for all sub-tours
+    tourData.subTours.forEach(subTour => {
+        const marker = L.marker([subTour.lat, subTour.lng]).addTo(map)
+            .on('click', function() {
+                map.setView([subTour.lat, subTour.lng], 15);
+                map.setZoom(5);
+                map.panBy([-100, 0]);
+                updateMapInfo(subTour);
             });
-            // Add event listeners to sub-tours
-            document.querySelectorAll('.sub-tour').forEach(subTour => {
-                subTour.addEventListener('click', function () {
-                    const lat = parseFloat(this.getAttribute('data-lat'));
-                    const lng = parseFloat(this.getAttribute('data-lng'));
-                    const images = JSON.parse(this.getAttribute('data-images')); // Parse images
-                    const description = this.getAttribute('data-description');
-                    const name = this.textContent.trim();
-                    const offsetLng = -0.005;
-                    map.setView([lat, lng - offsetLng], 15);
-                    updateMapInfo({ name, description, images });
-                });
-            });
-            document.getElementById('close-tour-image').addEventListener('click', () => {
-                document.getElementById('tour-details').classList.add('hidden');
-                document.querySelector('.grid').classList.remove('hidden');
-                document.getElementById('map-info').classList.add('hidden');
-            });
-        }
-        function updateMapInfo(subTour) {
-            const mapInfo = document.getElementById('map-info');
-            const imageContainer = document.getElementById('map-info-image-container');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const images = Array.isArray(subTour.images) ? subTour.images : [subTour.images];
-        
-            document.getElementById('map-info-title').textContent = subTour.name.replace('➔', '').trim();
-            document.getElementById('map-info-description').textContent = subTour.description;
-        
-            imageContainer.innerHTML = images.map((img, index) =>
-                `<img src="${img}" class="carousel-image ${index === 0 ? 'active' : 'hidden'}" alt="Tour Image">`
-            ).join('');
-    
-            if (images.length > 1) {
-                prevBtn.classList.remove('hidden');
-                nextBtn.classList.remove('hidden');
-            } else {
-                prevBtn.classList.add('hidden');
-                nextBtn.classList.add('hidden');
-            }
-        
-            // Handle next/prev buttons
-            let currentIndex = 0;
-            const carouselImages = document.querySelectorAll('.carousel-image');
-        
-            // Remove existing event listeners
-            const newPrevBtn = prevBtn.cloneNode(true);
-            const newNextBtn = nextBtn.cloneNode(true);
-            prevBtn.replaceWith(newPrevBtn);
-            nextBtn.replaceWith(newNextBtn);
-        
-            // Reattach event listeners
-            newNextBtn.addEventListener('click', () => {
-                carouselImages[currentIndex].classList.add('hidden');
-                currentIndex = (currentIndex + 1) % images.length;
-                carouselImages[currentIndex].classList.remove('hidden');
-            });
-        
-            newPrevBtn.addEventListener('click', () => {
-                carouselImages[currentIndex].classList.add('hidden');
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                carouselImages[currentIndex].classList.remove('hidden');
-            });
-        
-            // Show the floating info box
-            mapInfo.classList.remove('hidden');
-        }
+        markers.push(marker);
+    });
+    // Add event listeners to sub-tours
+    document.querySelectorAll('.sub-tour').forEach(subTour => {
+        subTour.addEventListener('click', function () {
+            const lat = parseFloat(this.getAttribute('data-lat'));
+            const lng = parseFloat(this.getAttribute('data-lng'));
+            const images = JSON.parse(this.getAttribute('data-images'));
+            const description = this.getAttribute('data-description');
+            const name = this.textContent.trim();
+            const offsetLng = -0.005;
+            map.setView([lat, lng - offsetLng], 15);
+            updateMapInfo({ name, description, images });
+        });
+    });
+    document.getElementById('close-tour-image').addEventListener('click', () => {
+        document.getElementById('tour-details').classList.add('hidden');
+        document.querySelector('.grid').classList.remove('hidden');
+        document.getElementById('map-info').classList.add('hidden');
+    });
+}
+
+function updateMapInfo(subTour) {
+    const mapInfo = document.getElementById('map-info');
+    const imageContainer = document.getElementById('map-info-image-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const images = Array.isArray(subTour.images) ? subTour.images : [subTour.images];
+
+    document.getElementById('map-info-title').textContent = subTour.name.replace('➔', '').trim();
+    document.getElementById('map-info-description').textContent = subTour.description;
+
+    imageContainer.innerHTML = images.map((img, index) =>
+        `<img src="${img}" class="carousel-image ${index === 0 ? 'active' : 'hidden'}" alt="Tour Image">`
+    ).join('');
+
+    if (images.length > 1) {
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+    } else {
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+    }
+
+    let currentIndex = 0;
+    const carouselImages = document.querySelectorAll('.carousel-image');
+
+    // Remove existing event listeners by replacing the buttons
+    const newPrevBtn = prevBtn.cloneNode(true);
+    const newNextBtn = nextBtn.cloneNode(true);
+    prevBtn.replaceWith(newPrevBtn);
+    nextBtn.replaceWith(newNextBtn);
+
+    newNextBtn.addEventListener('click', () => {
+        carouselImages[currentIndex].classList.add('hidden');
+        currentIndex = (currentIndex + 1) % images.length;
+        carouselImages[currentIndex].classList.remove('hidden');
+    });
+
+    newPrevBtn.addEventListener('click', () => {
+        carouselImages[currentIndex].classList.add('hidden');
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        carouselImages[currentIndex].classList.remove('hidden');
+    });
+
+    mapInfo.classList.remove('hidden');
+}
         
         
         // Function to fetch tour data 
@@ -313,7 +306,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                             name: "Secret Beach", 
                             lat: 11.1942031118851, 
                             lng: 119.27695142798181,
-                            images: "images/tourC/HiddenBeach1.png", // Single image as a string
+                            images: "images/tourC/SecretBeach.png", // Single image as a string
                             description: "A secret cove with a sandy beach surrounded by cliffs."
                         },
 
@@ -329,7 +322,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                             name: "Talisay Beach", 
                             lat: 11.194934034263463,
                             lng:  119.27143996231436, 
-                            images: "images/tourC/HiddenBeach1.png", // Single image as a string
+                            images: "images/tourC/TalisayBeach.png", // Single image as a string
                             description: "A tranquil beach perfect for swimming and relaxing."
                         }
                     ]
@@ -663,6 +656,165 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ---  Smooth scrolling for "Explore Trip" buttons ---
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+        });
 
+        // Improved mobile detection
+        function isMobile() {
+            return (
+                window.innerWidth <= 768 ||
+                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            );
+        }
+
+        // Only activate smooth scroll on web/desktop
+        let smoothScrollActive = false;
+        let wheelHandler = null;
+        let keydownHandler = null;
+
+        function activateSmoothScrollIfDesktop() {
+            // Remove previous handlers if any
+            if (smoothScrollActive && wheelHandler && keydownHandler) {
+                window.removeEventListener('wheel', wheelHandler, { passive: false });
+                document.removeEventListener('keydown', keydownHandler);
+            }
+            if (!isMobile()) {
+                smoothScrollActive = true;
+
+                const scrollSections = ['landing', 'tours', 'experience', 'contact','footer'];
+                const sections = scrollSections.map(id => document.getElementById(id)).filter(Boolean);
+                let isScrolling = false;
+                let lastScrollPosition = window.scrollY;
+                const scrollDelay = 800;
+
+                function getTargetSection(currentScroll, direction) {
+                    let targetSection = null;
+                    let smallestDistance = Infinity;
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionBottom = sectionTop + section.offsetHeight;
+                        const distanceToTop = Math.abs(currentScroll - sectionTop);
+                        const distanceToBottom = Math.abs(currentScroll - sectionBottom);
+                        if (direction === 'down') {
+                            if (sectionTop > currentScroll + 10 && distanceToTop < smallestDistance) {
+                                smallestDistance = distanceToTop;
+                                targetSection = section;
+                            }
+                        } else if (direction === 'up') {
+                            if (sectionBottom < currentScroll - 10 && distanceToBottom < smallestDistance) {
+                                smallestDistance = distanceToBottom;
+                                targetSection = section;
+                            }
+                        }
+                    });
+                    return targetSection;
+                }
+
+                // Wheel/Scroll handler
+                wheelHandler = function(e) {
+                    if (isMobile()) return;
+                    if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+                    e.preventDefault();
+
+                    const currentScroll = window.scrollY;
+                    const scrollDirection = e.deltaY > 0 ? 'down' : 'up';
+                    lastScrollPosition = currentScroll;
+
+                    const isAtFooter = window.innerHeight + currentScroll >= document.body.offsetHeight - 100;
+
+                    if (isAtFooter && scrollDirection === 'up') {
+                        const contactSection = document.getElementById('contact');
+                        if (contactSection && !isScrolling) {
+                            isScrolling = true;
+                            window.scrollTo({
+                                top: contactSection.offsetTop,
+                                behavior: 'smooth'
+                            });
+                            setTimeout(() => {
+                                isScrolling = false;
+                            }, scrollDelay);
+                        }
+                        return;
+                    }
+
+                    if (!isScrolling) {
+                        isScrolling = true;
+                        const viewportMiddle = currentScroll + (window.innerHeight / 2);
+                        const targetSection = getTargetSection(viewportMiddle, scrollDirection);
+
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+
+                        setTimeout(() => {
+                            isScrolling = false;
+                        }, scrollDelay);
+                    }
+                };
+
+                // Keyboard navigation handler
+                keydownHandler = function(e) {
+                    if (isMobile()) return;
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
+                        e.preventDefault();
+
+                        const currentScroll = window.scrollY;
+                        const direction = (e.key === 'ArrowDown' || e.key === 'PageDown') ? 'down' : 'up';
+                        const isAtFooter = window.innerHeight + currentScroll >= document.body.offsetHeight - 100;
+
+                        if (isAtFooter && direction === 'up') {
+                            const contactSection = document.getElementById('contact');
+                            if (contactSection) {
+                                window.scrollTo({
+                                    top: contactSection.offsetTop,
+                                    behavior: 'smooth'
+                                });
+                            }
+                            return;
+                        }
+
+                        const viewportMiddle = currentScroll + (window.innerHeight / 2);
+                        const targetSection = getTargetSection(viewportMiddle, direction);
+
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                };
+
+                window.addEventListener('wheel', wheelHandler, { passive: false });
+                document.addEventListener('keydown', keydownHandler);
+            } else {
+                smoothScrollActive = false;
+            }
+        }
+
+        // Initial activation
+        activateSmoothScrollIfDesktop();
+
+        // Re-check on resize (in case window is resized to or from mobile)
+        window.addEventListener('resize', function() {
+            activateSmoothScrollIfDesktop();
+        });
+
+        // Mobile: Passive touch events (no smooth scroll logic)
+        document.addEventListener('touchstart', function(e) {
+            // No scroll override on mobile
+        }, { passive: true });
+        document.addEventListener('touchend', function(e) {
+            // No scroll override on mobile
+        }, { passive: true });
+    });
     
 

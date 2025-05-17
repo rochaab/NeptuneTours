@@ -18,7 +18,8 @@
     @vite(['resources/js/app.js'])
     <style>
         html {
-            scroll-behavior: smooth;
+            /* Remove scroll-behavior: smooth, as it can break JS snapping */
+            /* scroll-behavior: smooth; */
         }
         section {
             min-height: 100vh;
@@ -29,58 +30,63 @@
     @include('partials.header')
     
     <section id="landing" class="relative h-screen bg-cover bg-center overflow-hidden">
-  <video 
-    autoplay 
-    loop 
-    muted 
-    playsinline 
-    class="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="{{ asset('images/landing.mp4') }}" type="video/mp4">
-    <!-- Fallback to first carousel image if video fails -->
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/landing2.png') }}');"></div>
-  </video>
+    <video 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+        <source src="{{ asset('images/landing.mp4') }}" type="video/mp4">
+        <!-- Fallback to first carousel image if video fails -->
+        <img src="{{ asset('images/landing2.png') }}" alt="Landing Fallback Image" class="absolute inset-0 w-full h-full object-cover">
+    </video>
 
     <div class="absolute inset-0 bg-black opacity-50"></div>
 
     <div class="absolute inset-0 flex justify-center items-center px-2 md:px-56 text-white">
-    <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full max-w-screen-2xl gap-12 md:gap-[8norem]  mt-12">
-        <!-- Left Content -->
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full max-w-screen-2xl gap-12 md:gap-[8norem] mt-12">
+        <!-- Left Content - Centered on mobile, left-aligned on desktop -->
         <div class="w-full md:w-3/5 text-center md:text-left">
-        <h1 class="text-4xl md:text-8xl font-semibold font-Eczar leading-tight mb-4 pr-32" data-aos="fade-right">Neptune Tours and Travels</h1>
+            <h1 class="text-4xl md:text-8xl font-semibold font-Eczar leading-tight mb-4 md:pr-32" data-aos="fade-right">Neptune Tours and Travels</h1>
             <div data-aos="fade-right">
-            <p class="text-lg leading-tight mb-2 font-Anek pr-64 tracking-[0em] mb-8">Welcomes you to the breathtaking beauty of El Nido, Palawan. Whether you're exploring hidden lagoons or discovering inland gems, we're here to make every moment easy, fun, and unforgettable. 
-  We offer affordable, hassle-free adventures made with local heart—so you can soak in the island life the way it's meant to be. Let us take care of the details while you make the memories.
+            <p class="text-lg leading-tight mb-2 font-Anek md:pr-64 tracking-[0em] mb-8 px-4 md:px-0">
+                Welcomes you to the breathtaking beauty of El Nido, Palawan. Whether you're exploring hidden lagoons or discovering inland gems, we're here to make every moment easy, fun, and unforgettable. 
+                We offer affordable, hassle-free adventures made with local heart—so you can soak in the island life the way it's meant to be. Let us take care of the details while you make the memories.
             </p>
             </div>
+            <div class="text-center md:text-left">
             <a href="#tours" data-aos="fade-right" class="inline-block bg-white text-[#080c24] px-6 py-2 rounded-lg text-lg md:text-xl font-semibold font-Anek hover:bg-blue-100 transition duration-300">Explore Tours</a>
+            </div>
         </div>
 
-        <!-- QR Code Container -->
+        <!-- QR Code Container - Hidden on mobile, visible on desktop -->
         <div class="hidden md:flex flex-col bg-white/20 backdrop-blur-sm text-white rounded-xl p-6 shadow-lg w-[22rem] mt-8" data-aos="fade-left">
             <h2 class="text-xl font-Eczar font-bold mb-2 text-center">Guest Registration & Feedback</h2>
             <p class="text-sm text-center mb-6">Scan the QR codes below to fill out our guest form and provide feedback for your experience.</p>
             <div class="flex justify-between gap-4">
-                <!-- Guest Form -->
-                <div class="text-center">
-                    <div class="bg-white p-2 rounded-lg mb-2 border">
-                        <img src="{{ asset('images/qrguestform.png') }}" alt="Guest Fill Up Form QR Code" class="w-28 h-28">
-                    </div>
-                    <p class="font-Eczar font-semibold text-xs">Guest Form</p>
+            <!-- Guest Form -->
+            <div class="text-center">
+                <div class="bg-white p-2 rounded-lg mb-2 border">
+                <img src="{{ asset('images/qrguestform.png') }}" alt="Guest Fill Up Form QR Code" class="w-28 h-28">
                 </div>
-                <!-- Feedback Form -->
-                <div class="text-center">
-                    <div class="bg-white p-2 rounded-lg mb-2 border">
-                        <img src="{{ asset('images/qrfeedback.png') }}" alt="Guest Feedback QR Code" class="w-28 h-28">
-                    </div>
-                    <p class="font-Eczar font-semibold text-xs">Guest Feedback</p>
+                <p class="font-Eczar font-semibold text-xs">Guest Form</p>
+            </div>
+            <!-- Feedback Form -->
+            <div class="text-center">
+                <div class="bg-white p-2 rounded-lg mb-2 border">
+                <img src="{{ asset('images/qrfeedback.png') }}" alt="Guest Feedback QR Code" class="w-28 h-28">
                 </div>
+                <p class="font-Eczar font-semibold text-xs">Guest Feedback</p>
+            </div>
             </div>
         </div>
+        </div>
     </div>
-</div>
-</section>
-    <section id="tours" class="w-full flex flex-col justify-center pt-12 bg-[#faf7f2] font-Inter">
+    </section>
+
+
+    <section id="tours" class="w-full flex flex-col justify-center pt-24 bg-[#faf7f2] font-Inter">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-start">
                 <div data-aos="fade-left" data-aos-duration="1000">
@@ -398,199 +404,10 @@
 </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
     var baseAssetUrl = "{{ asset('') }}";
     </script>
-    <script>
-    window.App = {
-        baseUrl: "{{ url('/') }}"
-    };
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize AOS animation library
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: false
-        });
 
-        // Snap scrolling functionality - only target sections with specific IDs
-        const scrollSections = ['landing', 'tours', 'experience', 'contact'];
-        const sections = scrollSections.map(id => document.getElementById(id)).filter(Boolean);
-        let isScrolling = false;
-        let lastScrollPosition = window.scrollY;
-        const scrollDelay = 800; // Delay between scrolls in ms
-        
-        // Function to find the closest section
-        function getTargetSection(currentScroll, direction) {
-            let targetSection = null;
-            let smallestDistance = Infinity;
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                const distanceToTop = Math.abs(currentScroll - sectionTop);
-                const distanceToBottom = Math.abs(currentScroll - sectionBottom);
-                
-                // Determine which section to target based on scroll direction
-                if (direction === 'down') {
-                    if (sectionTop > currentScroll + 10 && distanceToTop < smallestDistance) {
-                        smallestDistance = distanceToTop;
-                        targetSection = section;
-                    }
-                } else if (direction === 'up') {
-                    if (sectionBottom < currentScroll - 10 && distanceToBottom < smallestDistance) {
-                        smallestDistance = distanceToBottom;
-                        targetSection = section;
-                    }
-                }
-            });
-            
-            return targetSection;
-        }
-        
-        // Main scroll event handler
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.scrollY;
-            const scrollDirection = currentScroll > lastScrollPosition ? 'down' : 'up';
-            lastScrollPosition = currentScroll;
-            
-            // Check if we're at the bottom of the page (footer)
-            const isAtFooter = window.innerHeight + currentScroll >= document.body.offsetHeight - 100;
-            
-            // If scrolling up from footer, always go to contact section first
-            if (isAtFooter && scrollDirection === 'up') {
-                const contactSection = document.getElementById('contact');
-                if (contactSection && !isScrolling) {
-                    isScrolling = true;
-                    window.scrollTo({
-                        top: contactSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                    setTimeout(() => {
-                        isScrolling = false;
-                    }, scrollDelay);
-                }
-                return;
-            }
-            
-            if (!isScrolling) {
-                isScrolling = true;
-                
-                // Get the current viewport middle point
-                const viewportMiddle = currentScroll + (window.innerHeight / 2);
-                const targetSection = getTargetSection(viewportMiddle, scrollDirection);
-                
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-                
-                // Reset the scrolling flag after a delay
-                setTimeout(() => {
-                    isScrolling = false;
-                }, scrollDelay);
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp') {
-                e.preventDefault();
-                
-                const currentScroll = window.scrollY;
-                const direction = (e.key === 'ArrowDown' || e.key === 'PageDown') ? 'down' : 'up';
-                
-                // Check if we're at the bottom of the page (footer)
-                const isAtFooter = window.innerHeight + currentScroll >= document.body.offsetHeight - 100;
-                
-                // If scrolling up from footer, always go to contact section first
-                if (isAtFooter && direction === 'up') {
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        window.scrollTo({
-                            top: contactSection.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                    return;
-                }
-                
-                const viewportMiddle = currentScroll + (window.innerHeight / 2);
-                const targetSection = getTargetSection(viewportMiddle, direction);
-                
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-        
-        // Touch navigation for mobile devices
-        let touchStartY = 0;
-        let touchEndY = 0;
-        const minSwipeDistance = 50;
-        
-        document.addEventListener('touchstart', function(e) {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-        
-        document.addEventListener('touchend', function(e) {
-            touchEndY = e.changedTouches[0].clientY;
-            const diff = touchStartY - touchEndY;
-            
-            if (Math.abs(diff) > minSwipeDistance) {
-                const currentScroll = window.scrollY;
-                const direction = diff > 0 ? 'down' : 'up';
-                
-                // Check if we're at the bottom of the page (footer)
-                const isAtFooter = window.innerHeight + currentScroll >= document.body.offsetHeight - 100;
-                
-                // If scrolling up from footer, always go to contact section first
-                if (isAtFooter && direction === 'up') {
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        window.scrollTo({
-                            top: contactSection.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                    return;
-                }
-                
-                const viewportMiddle = currentScroll + (window.innerHeight / 2);
-                const targetSection = getTargetSection(viewportMiddle, direction);
-                
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        }, { passiave: true });
-        
-        // Add CSS for snap scrolling
-        const style = document.createElement('style');
-        style.textContent = `
-            html {
-                scroll-snap-type: y proximity;
-                scroll-behavior: smooth;
-                overflow-y: scroll;
-            }
-            section {
-                scroll-snap-align: start;
-                min-height: 100vh;
-            }
-        `;
-        document.head.appendChild(style);
-    });
-</script>
+
 </body>
 </html>
