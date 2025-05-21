@@ -31,7 +31,9 @@
             <!-- Navigation Menu -->
             <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"aria-label="Primary menu">
                 <ul class="flex justify-start space-x-20">
-                    <li class="menu-item"><a href="#explore" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    
+                    <li class="menu-item"><a href="#landing" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">HOME</a></li>
+                    <li class="menu-item"><a href="#tours" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
                     <li class="menu-item"><a href="#experience" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
                     <li class="menu-item"><a href="#contact" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
                     <li class="menu-item"><a href="#footer" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>

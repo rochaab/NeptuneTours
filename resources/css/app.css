@@ -185,7 +185,7 @@ section {
         width: 100%; /* ---Full width on mobile---*/
         min-height: 300px; /* ---Ensures a minimum height--- */
         height: auto; /*--- Adjusts dynamically--- */
-        top: 20px;
+        top: -10px;
         right:20px;
         display: flex;
         justify-content: center;
