@@ -53,7 +53,7 @@
                 </div>
                 <div class="h-full flex items-center justify-center">
                     <ul class="space-y-4 text-center">
-                        <li><a href="#explore" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                        <li><a href="#tours" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
                         <li><a href="#experience" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
                         <li><a href="#contact" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
                         <li><a href="#footer" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>

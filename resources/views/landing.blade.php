@@ -37,30 +37,38 @@
         playsinline 
         class="absolute inset-0 w-full h-full object-cover"
     >
-        <source src="{{ asset('images/landing.mp4') }}" type="video/mp4">
-        <img src="{{ asset('images/landing2.png') }}" alt="Landing Fallback Image" class="absolute inset-0 w-full h-full object-cover">
+        <source src="{{ asset('images/landing.mp4') }}" type="video/mp4"/>
+        <img src="{{ asset('images/landing2.png') }}" alt="Landing Fallback Image" class="absolute inset-0 w-full h-full object-cover"/>
     </video>
     <div class="absolute inset-0 bg-black opacity-50"></div>
 
     <!-- Main content wrapper for vertical arrangement -->
     <div class="relative flex-1 flex flex-col justify-center items-center px-2 md:px-56 text-white z-10">
-        <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full max-w-screen-2xl gap-12 md:gap-[8norem] mt-12">
-            <div class="w-full md:w-3/5 text-center md:text-left">
-                <h1 class="text-4xl md:text-8xl font-semibold font-Eczar leading-tight mb-4 md:pr-32" data-aos="fade-right">Neptune Tours and Travels</h1>
+        <!-- Adjusted gap / margin for better responsiveness -->
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-start w-full max-w-screen-2xl gap-6 md:gap-12 mt-12">
+            <div class="w-full md:w-3/5 text-center md:text-left px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-8xl font-semibold font-Eczar leading-tight mb-4 md:pr-32" data-aos="fade-right">
+                    Neptune Tours and Travels
+                </h1>
                 <div data-aos="fade-right">
-                    <p class="text-lg leading-tight mb-2 font-Anek md:pr-64 tracking-[0em] mb-8 px-4 md:px-0">
+                    <!-- Reduced padding on mobile to avoid overlap -->
+                    <p class="text-sm sm:text-lg leading-tight mb-2 font-Anek md:pr-64 tracking-normal mb-8">
                         Welcomes you to the breathtaking beauty of El Nido, Palawan. Whether you're exploring hidden lagoons or discovering inland gems, we're here to make every moment easy, fun, and unforgettable.
                         We offer affordable, hassle-free adventures made with local heart—so you can soak in the island life the way it's meant to be. Let us take care of the details while you make the memories.
                     </p>
                 </div>
                 <div class="text-center md:text-left">
-                    <a href="#tours" data-aos="fade-right" class="inline-block bg-white text-[#080c24] px-6 py-2 rounded-lg text-lg md:text-xl font-semibold font-Anek hover:bg-blue-100 transition duration-300">Explore Tours</a>
+                    <a href="#tours" data-aos="fade-right" class="inline-block bg-white text-[#080c24] px-4 py-2 sm:px-6 sm:py-2 rounded-lg text-sm sm:text-lg md:text-xl font-semibold font-Anek hover:bg-blue-100 transition duration-300">
+                        Explore Tours
+                    </a>
                 </div>
             </div>
             <!-- Desktop QR -->
             <div class="hidden md:flex flex-col bg-white/20 backdrop-blur-sm text-white rounded-xl p-6 shadow-lg w-[22rem] mt-8" data-aos="fade-left">
                 <h2 class="text-xl font-Eczar font-bold mb-2 text-center">Guest Registration & Feedback</h2>
-                <p class="text-sm text-center mb-6">Scan the QR codes below to fill out our guest form and provide feedback for your experience.</p>
+                <p class="text-sm text-center mb-6">
+                    Scan the QR codes below to fill out our guest form and provide feedback for your experience.
+                </p>
                 <div class="flex justify-between gap-4">
                     <div class="text-center">
                         <div class="bg-white p-2 rounded-lg mb-2 border">
@@ -81,19 +89,19 @@
 
     <!-- Mobile QR Code Container - Only visible on mobile, at the bottom -->
     <div class="md:hidden relative z-10 w-full flex justify-center">
-        <div class="flex flex-col bg-white/20 backdrop-blur-sm text-white rounded-t-xl p-4 shadow-lg w-full max-w-xs mx-auto mb-4">
+        <div class="flex flex-col bg-white/20 backdrop-blur-sm text-white rounded-t-xl p-2 shadow-lg w-full max-w-xs mx-auto mb-4">
             <h2 class="text-lg font-Eczar font-bold mb-2 text-center">Guest Registration & Feedback</h2>
             <p class="text-xs text-center mb-4">Scan the QR codes below to fill out our guest form and provide feedback for your experience.</p>
-            <div class="flex justify-between gap-4">
-                <div class="text-center">
-                    <div class="bg-white p-2 rounded-lg mb-2 border">
-                        <img src="{{ asset('images/qrguestform.png') }}" alt="Guest Fill Up Form QR Code" class="w-24 h-24">
+            <div class="flex flex-wrap justify-between gap-4">
+                <div class="text-center flex-1 min-w-[40%]">
+                    <div class="p-2 rounded-lg mb-2">
+                        <img src="{{ asset('images/qrguestform.png') }}" alt="Guest Fill Up Form QR Code" class="w-20 h-20 mx-auto">
                     </div>
                     <p class="font-Eczar font-semibold text-xs">Guest Form</p>
                 </div>
-                <div class="text-center">
-                    <div class="bg-white p-2 rounded-lg mb-2 border">
-                        <img src="{{ asset('images/qrfeedback.png') }}" alt="Guest Feedback QR Code" class="w-24 h-24">
+                <div class="text-center flex-1 min-w-[40%]">
+                    <div class="p-2 mb-2">
+                        <img src="{{ asset('images/qrfeedback.png') }}" alt="Guest Feedback QR Code" class="w-20 h-20 mx-auto">
                     </div>
                     <p class="font-Eczar font-semibold text-xs">Guest Feedback</p>
                 </div>
