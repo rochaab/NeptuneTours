@@ -7,7 +7,6 @@
         left: 0;
         right: 0;
     }
-
 </style>
 
     <div class="container mx-auto px-4 py-3">
@@ -30,10 +29,14 @@
             </button>
 
             <!-- Navigation Menu -->
-            <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"" aria-label="Primary menu">
+            <nav id="site-navigation" class="hidden md:flex flex-1 md:ml-[350px]"aria-label="Primary menu">
                 <ul class="flex justify-start space-x-20">
-                    <li class="menu-item"><a href="#explore" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    
+                    <li class="menu-item"><a href="#landing" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">HOME</a></li>
+                    <li class="menu-item"><a href="#tours" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                    <li class="menu-item"><a href="#experience" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
                     <li class="menu-item"><a href="#contact" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                    <li class="menu-item"><a href="#footer" class="text-white text-sm hover:text-gray-600 font-semibold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>
                 </ul>
             </nav>
         </div>
@@ -50,8 +53,10 @@
                 </div>
                 <div class="h-full flex items-center justify-center">
                     <ul class="space-y-4 text-center">
-                        <li><a href="#explore" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
-                        <li><a href="#contact" class="block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.2em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                        <li><a href="#tours" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">TOURS</a></li>
+                        <li><a href="#experience" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">EXPERIENCES</a></li>
+                        <li><a href="#contact" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">CONTACT US</a></li>
+                        <li><a href="#footer" class="mobile-menu-link block px-4 py-3 text-white text-lg hover:text-gray-600 font-bold font-Inter tracking-[0.1em]" style="font-family: 'Raleway', sans-serif;">MORE</a></li>
                     </ul>
                 </div>
             </div>
@@ -67,39 +72,70 @@
     const logo = document.querySelector('.custom-logo');
     const hamburgerIcon = document.querySelector('.hamburger');
     const closeIcon = document.querySelector('.close');
-    let lastScrollY = window.scrollY;
-    let ticking = false;
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    
+    let isMenuOpen = false;
 
     function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
         mobileMenu.classList.toggle('hidden');
         hamburgerIcon.classList.toggle('hidden');
         closeIcon.classList.toggle('hidden');
         document.body.classList.toggle('overflow-hidden');
     }
 
-    mobileMenuButton.addEventListener('click', toggleMenu);
+    function closeMenu() {
+        if (isMenuOpen) {
+            isMenuOpen = false;
+            mobileMenu.classList.add('hidden');
+            hamburgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
 
-    // Throttled scroll handler for better performance
-    function updateHeader() {
-        if (window.scrollY > 0) {
-            header.classList.add('bg-[#040823]', 'shadow-md');
-            header.classList.remove('bg-transparent', 'mt-8');
-            logo.style.transform = 'scale(0.9)';
-        } else {
+    mobileMenuButton.addEventListener('click', toggleMenu);
+    
+    // Add click event listeners to mobile menu links
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Improved scroll handler for header visibility
+    let lastScrollY = window.scrollY;
+    
+    function handleScroll() {
+        const currentScrollY = window.scrollY;
+        
+        // Always show header when scrolling up or at the top 
+        if (currentScrollY <= 0) {
+            // At the top of the page
             header.classList.remove('bg-[#040823]', 'shadow-md');
             header.classList.add('bg-transparent', 'mt-8');
             logo.style.transform = 'scale(1)';
+        } else {
+            // Scrolled down
+            header.classList.add('bg-[#040823]', 'shadow-md');
+            header.classList.remove('bg-transparent', 'mt-8');
+            logo.style.transform = 'scale(0.9)';
         }
-        ticking = false;
+        
+        // Update last scroll position
+        lastScrollY = currentScrollY;
     }
 
+    // Use a more efficient event listener with requestAnimationFrame
+    let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
-            window.requestAnimationFrame(updateHeader);
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
             ticking = true;
         }
     });
 
     // Initial check
-    updateHeader();
+    handleScroll();
 </script>

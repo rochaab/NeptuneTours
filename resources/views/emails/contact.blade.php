@@ -89,13 +89,12 @@
     <table>
         <tr>
             <td>
-                   <!-- Add the logo here -->
-                <img src="{{ asset('images/logo.png') }}" alt="Neptune Travel And Tours Logo" style="width:150px; height:auto; display:block; margin-bottom: 20px;">
-                <h2>Contact Us Message</h2>
+                <h2>Client Message Received</h2>
                 <div class="content">
                     <p>Hi, Admin</p>
                     <p>You received the following message:</p>
                     <p><strong>Name:</strong> {{ $request->name }}</p>
+                    <p><strong>Phone:</strong> {{ $request->phone }}</p>
                     <p><strong>Email:</strong> {{ $request->email }}</p>
                     <p><strong>Message:</strong> {{ $request->message }}</p>
                 </div>
