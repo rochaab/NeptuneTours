@@ -214,8 +214,9 @@
                 <button class="absolute left-2 sm:left-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="prevReview">
                     &#9664;
                 </button>
-               
-                <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
+                
+                <!-- Review Container -->
+            <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
                 <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
                     <div class="absolute top-0 left-0 w-full h-full">
                         <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
@@ -271,14 +272,11 @@
                 </div>   
             </div>
                 
-                <div class="flex items-center space-x-4 sm:space-x-6 w-full max-w-[95vw] px-4 sm:px-8 overflow-x-auto scrollbar-hide scroll-smooth snap-x" id="reviewContainer">
-                    <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
-                        <div class="absolute top-0 left-0 w-full h-full">
-                            <video class="w-full h-full object-cover review-video transition-opacity duration-300 group-hover:opacity-80" preload="auto">
-                                <source src="{{ asset('videos/rev3.MP4') }}" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
+                <button class="absolute right-2 sm:right-4 z-10 bg-black/30 p-2 sm:p-3 rounded-full border border-white hover:bg-white/40 transition-all duration-200 transform hover:scale-110" id="nextReview">
+                    &#9654;
+                </button>
+            </div>
+        </div>
 
                     <div class="relative rounded-xl shadow-lg overflow-hidden w-full max-w-[85vw] sm:max-w-xs md:max-w-sm min-h-[300px] sm:min-h-[400px] md:min-h-[500px] flex-shrink-0 snap-start transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group" data-aos="fade-up">
                         <div class="absolute top-0 left-0 w-full h-full">
